@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtTitleStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Information Student"
+        android:textAlignment="center"
+        android:textSize="25dp"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/edit_test_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:defaultFocusHighlightEnabled="true"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtBirthDay"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="BirthDay" />
+
+        <EditText
+            android:id="@+id/edit_test_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="date" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtGrade"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Grade" />
+
+        <EditText
+            android:id="@+id/edit_test_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chb_math"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Math" />
+
+            <CheckBox
+                android:id="@+id/chb_physical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Physical" />
+
+            <CheckBox
+                android:id="@+id/chb_chemistry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chemistry" />
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNameParent"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Name Parent" />
+
+        <EditText
+            android:id="@+id/edit_test_name_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtPhone"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Phone" />
+
+        <EditText
+            android:id="@+id/edit_test_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="phone" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:onClick="ClickOnReset"/>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:onClick="ClickOnSubmit"/>
+
+</LinearLayout>
