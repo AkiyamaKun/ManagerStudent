@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
-
 /**
  * Author: DangNHH
  * 19/05/2018
