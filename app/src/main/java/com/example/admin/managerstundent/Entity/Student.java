@@ -17,6 +17,7 @@ public class Student extends RealmObject {
      */
     @PrimaryKey
     private Integer studentID;
+
     /**
      * Name of student
      */
