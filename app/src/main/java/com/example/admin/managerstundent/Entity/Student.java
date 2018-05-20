@@ -199,4 +199,19 @@ public class Student extends RealmObject {
     public void setGrade(Integer grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentID=" + studentID +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", name_parent='" + name_parent + '\'' +
+                ", phone=" + phone +
+                ", math=" + math +
+                ", physical=" + physical +
+                ", chemistry=" + chemistry +
+                ", grade=" + grade +
+                '}';
+    }
 }
