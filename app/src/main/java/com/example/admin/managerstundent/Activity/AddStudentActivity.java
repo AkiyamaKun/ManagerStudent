@@ -2,6 +2,7 @@ package com.example.admin.managerstundent.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import io.realm.Realm;
  * Add Student Activity Class
  */
 public class AddStudentActivity extends AppCompatActivity {
+    private static final String TAG = AddStudentActivity.class.toString();
     //Realm use for database
     private Realm realm;
 
@@ -99,24 +101,25 @@ public class AddStudentActivity extends AppCompatActivity {
             nextId = currentId.intValue() + 1;
         }
 
-        Student student = realm.createObject(Student.class);
-        student.setStudentID(nextId);
-        student.setName(name.toString());
-        student.setName_parent(nameParent.toString());
-        student.setPhone(Integer.parseInt(phone.toString()));
+        Student student = realm.createObject(Student.class, nextId);
+//        student.setStudentID(nextId);
+        student.setName(name.getText().toString());
+        student.setName_parent(nameParent.getText().toString());
+        student.setPhone(Integer.parseInt(phone.getText().toString()));
         student.setChemistry(chemistry.isChecked());
         student.setMath(math.isChecked());
         student.setPhysical(physical.isChecked());
-        student.setGrade(Integer.parseInt(grade.toString()));
+        student.setGrade(Integer.parseInt(grade.getText().toString()));
 
         //Cover String to Date
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            Date date = formatter.parse(birthday.toString());
+            Date date = formatter.parse(birthday.getText().toString());
             student.setBirthday(date);
         } catch (ParseException e) {
             student.setBirthday(null);
         }
+        Log.d(TAG, String.format("ClickOnSubmit: %s",student.toString() ));
 
         //Commit transaction
         realm.commitTransaction();
