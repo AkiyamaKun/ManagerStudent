@@ -16,4 +16,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="title_activity_welcome">ManagerStudent</string>
+    <string name="dummy_content">WELCOME\nSCREEN</string>
 </resources>
