@@ -87,4 +87,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddStudentActivity.class);
         startActivity(intent);
     }
+
+    public void viewTimeTable(View view) {
+        Intent intent = new Intent(this, TableActivity.class);
+        startActivity(intent);
+    }
 }
