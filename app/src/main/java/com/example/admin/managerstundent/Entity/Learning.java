@@ -21,20 +21,7 @@ public class Learning extends RealmObject {
      */
     private int classID;
 
-    /**
-     * ID of slot
-     */
-    private int slotID;
 
-    /**
-     * ID of weekday
-     */
-    private int weekdayID;
-
-    /**
-     * Getter learningID
-     * @return learningID
-     */
     public int getLearningID() {
         return learningID;
     }
@@ -53,22 +40,6 @@ public class Learning extends RealmObject {
      */
     public int getClassID() {
         return classID;
-    }
-
-    /**
-     * Getter slotID
-     * @return slotID
-     */
-    public int getSlotID() {
-        return slotID;
-    }
-
-    /**
-     * Getter weekdayID
-     * @return weekdayID
-     */
-    public int getWeekdayID() {
-        return weekdayID;
     }
 
     /**
@@ -95,19 +66,4 @@ public class Learning extends RealmObject {
         this.classID = classID;
     }
 
-    /**
-     * Setter slotID
-     * @param slotID
-     */
-    public void setSlotID(int slotID) {
-        this.slotID = slotID;
-    }
-
-    /**
-     * Setter weekdayID
-     * @param weekdayID
-     */
-    public void setWeekdayID(int weekdayID) {
-        this.weekdayID = weekdayID;
-    }
 }

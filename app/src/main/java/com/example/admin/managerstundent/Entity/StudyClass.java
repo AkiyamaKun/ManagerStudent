@@ -1,5 +1,8 @@
 package com.example.admin.managerstundent.Entity;
 
+import android.support.annotation.Nullable;
+
+
 import io.realm.annotations.PrimaryKey;
 
 public class StudyClass {
@@ -16,14 +19,9 @@ public class StudyClass {
     private String className;
 
     /**
-     * Quantity of maximum student in class
-     */
-    private int quanity;
-
-    /**
      * ID of course
      */
-    private int courseID;
+    private int course;
 
     /**
      * ID of teacher
@@ -38,12 +36,12 @@ public class StudyClass {
     /**
      * ID of slot
      */
-    private int slotID;
+    private int slot;
 
     /**
      * ID of weekday
      */
-    private int weekdayID;
+    private int weekday;
 
     /**
      * Getter classID
@@ -61,20 +59,13 @@ public class StudyClass {
         return className;
     }
 
-    /**
-     * Getter quanity
-     * @return quanity
-     */
-    public int getQuanity() {
-        return quanity;
-    }
 
     /**
-     * Getter courseID
-     * @return courseID
+     * Getter course
+     * @return course
      */
     public int getCourseID() {
-        return courseID;
+        return course;
     }
 
     /**
@@ -94,19 +85,19 @@ public class StudyClass {
     }
 
     /**
-     * Getter slotID
-     * @return slotID
+     * Getter slot
+     * @return slot
      */
-    public int getSlotID() {
-        return slotID;
+    public int getSlot() {
+        return slot;
     }
 
     /**
-     * Getter weekdayID
-     * @return weekdayID
+     * Getter weekday
+     * @return weekday
      */
-    public int getWeekdayID() {
-        return weekdayID;
+    public int getWeekday() {
+        return weekday;
     }
 
     /**
@@ -126,19 +117,11 @@ public class StudyClass {
     }
 
     /**
-     * Setter quanity
-     * @param quanity
+     * Setter course
+     * @param course
      */
-    public void setQuanity(int quanity) {
-        this.quanity = quanity;
-    }
-
-    /**
-     * Setter courseID
-     * @param courseID
-     */
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
+    public void setCourseID(int course) {
+        this.course = course;
     }
 
     /**
@@ -158,18 +141,18 @@ public class StudyClass {
     }
 
     /**
-     * Setter slotID
-     * @param slotID
+     * Setter slot
+     * @param slot
      */
-    public void setSlotID(int slotID) {
-        this.slotID = slotID;
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 
     /**
      * Setter weekdayID
      * @param weekdayID
      */
-    public void setWeekdayID(int weekdayID) {
-        this.weekdayID = weekdayID;
+    public void setWeekday(int weekday) {
+        this.weekday = weekday;
     }
 }

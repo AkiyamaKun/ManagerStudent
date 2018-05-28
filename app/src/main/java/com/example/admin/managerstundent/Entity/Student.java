@@ -28,30 +28,25 @@ public class Student extends RealmObject {
      */
     private Date birthday;
 
+    private String sex;
+
     /**
      * Name Parent of student
      */
     private String name_parent;
 
     /**
-     * Phone of parent of student
+     * Phone of student
      */
-    private Integer phone;
+    private String phone;
 
-    /**
-     * Yes/no learning subject Math
-     */
-    private Boolean math;
+    private String phone_parent;
 
-    /**
-     * Yes/no learning subject Physical
-     */
-    private Boolean physical;
+    private int tuitionFee;
 
-    /**
-     * Yes/no learning subject Chemistry
-     */
-    private Boolean chemistry;
+    private boolean statusPayment;
+
+    private Date dateStart;
 
     /**
      * Grade of student
@@ -110,7 +105,7 @@ public class Student extends RealmObject {
      * Getter phone
      * @return phone
      */
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -118,56 +113,8 @@ public class Student extends RealmObject {
      * Setter phone
      * @param phone
      */
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    /**
-     * Getter math
-     * @return math
-     */
-    public Boolean getMath() {
-        return math;
-    }
-
-    /**
-     * Setter math
-     * @param math
-     */
-    public void setMath(Boolean math) {
-        this.math = math;
-    }
-
-    /**
-     * Getter physical
-     * @return physical
-     */
-    public Boolean getPhysical() {
-        return physical;
-    }
-
-    /**
-     * Setter physical
-     * @param physical
-     */
-    public void setPhysical(Boolean physical) {
-        this.physical = physical;
-    }
-
-    /**
-     * Getter chemistry
-     * @return chemistry
-     */
-    public Boolean getChemistry() {
-        return chemistry;
-    }
-
-    /**
-     * Setter chemistry
-     * @param chemistry
-     */
-    public void setChemistry(Boolean chemistry) {
-        this.chemistry = chemistry;
     }
 
     /**
@@ -201,18 +148,83 @@ public class Student extends RealmObject {
         this.grade = grade;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentID=" + studentID +
-                ", name='" + name + '\'' +
-                ", birthday=" + birthday +
-                ", name_parent='" + name_parent + '\'' +
-                ", phone=" + phone +
-                ", math=" + math +
-                ", physical=" + physical +
-                ", chemistry=" + chemistry +
-                ", grade=" + grade +
-                '}';
+    /**
+     * Getter sex
+     * @return sex
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * Setter sex
+     * @param sex
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * Getter phone_parent
+     * @return phone_parent
+     */
+    public String getPhone_parent() {
+        return phone_parent;
+    }
+
+    /**
+     * Setter phone_parent
+     * @param phone_parent
+     */
+    public void setPhone_parent(String phone_parent) {
+        this.phone_parent = phone_parent;
+    }
+
+    /**
+     * Getter tuitionFee
+     * @return tuitionFee
+     */
+    public int getTuitionFee() {
+        return tuitionFee;
+    }
+
+    /**
+     * Setter tuitionFee
+     * @param tuitionFee
+     */
+    public void setTuitionFee(int tuitionFee) {
+        this.tuitionFee = tuitionFee;
+    }
+
+    /**
+     * Getter statusPayment
+     * @return statusPayment
+     */
+    public boolean isStatusPayment() {
+        return statusPayment;
+    }
+
+    /**
+     * Setter statusPayment
+     * @param statusPayment
+     */
+    public void setStatusPayment(boolean statusPayment) {
+        this.statusPayment = statusPayment;
+    }
+
+    /**
+     * Getter dateStart
+     * @return dateStart
+     */
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    /**
+     * Setter dateStart
+     * @param dateStart
+     */
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
     }
 }

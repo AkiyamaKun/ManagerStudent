@@ -125,6 +125,7 @@
                 android:layout_marginBottom="30px"
                 android:layout_marginLeft="30px"
                 android:clickable="true"
+                android:onClick="viewTimeTable"
                 app:srcCompat="@mipmap/ic_action_addsclass" />
 
         </RelativeLayout>

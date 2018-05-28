@@ -18,7 +18,7 @@ public class Room {
     /**
      * Floor of room
      */
-    private int floot;
+    private int floor;
 
     /**
      * Getter roomID
@@ -37,11 +37,11 @@ public class Room {
     }
 
     /**
-     * Getter floot
-     * @return floot
+     * Getter floor
+     * @return floor
      */
-    public int getFloot() {
-        return floot;
+    public int getFloor() {
+        return floor;
     }
 
     /**
@@ -61,10 +61,10 @@ public class Room {
     }
 
     /**
-     * Setter floot
-     * @param floot
+     * Setter floor
+     * @param floor
      */
-    public void setFloot(int floot) {
-        this.floot = floot;
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 }

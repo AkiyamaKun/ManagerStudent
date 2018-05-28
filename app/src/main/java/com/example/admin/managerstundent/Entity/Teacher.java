@@ -100,8 +100,8 @@ public class Teacher extends RealmObject {
     }
 
     /**
-     * Setter id
-     * @param id
+     * Setter teacherID
+     * @param teacherID
      */
     public void setTeacherID(int teacherID) {
         this.teacherID = teacherID;
