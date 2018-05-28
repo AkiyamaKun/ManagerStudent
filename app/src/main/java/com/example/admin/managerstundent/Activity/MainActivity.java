@@ -18,6 +18,7 @@ import io.realm.RealmConfiguration;
  *
  * Main Activity Class
  */
+//Day la nhanh cua may ne Dang
 public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle mToggle;
