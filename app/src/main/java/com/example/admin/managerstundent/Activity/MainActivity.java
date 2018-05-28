@@ -21,6 +21,8 @@ import io.realm.RealmConfiguration;
  *
  * Main Activity Class
  */
+
+//Day la nhanh cua Zetysx
 public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle mToggle;
