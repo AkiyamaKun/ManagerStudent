@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.example.admin.managerstundent.R;
+
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -22,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle mToggle;
 
+    //Bind all View
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+
     /**
      * Override On Create
      * @param savedInstanceState
@@ -32,6 +39,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Configuration Realm Default
+        configurationRealmDefault();
+
+        //Init Menu
+        initNavigationMenu();
+    }
+
+    /**
+     * Init Nagigation Menu
+     */
+    private void initNavigationMenu() {
+        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    /**
+     * Configuration Realm Default
+     */
+    private void configurationRealmDefault(){
         Realm.init(getApplicationContext());
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
@@ -40,15 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
-
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     /**
@@ -70,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
@@ -87,4 +106,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddStudentActivity.class);
         startActivity(intent);
     }
+
+
 }
