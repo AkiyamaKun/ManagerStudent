@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 import com.example.admin.managerstundent.Entity.Student;
 import com.example.admin.managerstundent.R;
 import java.text.ParseException;
@@ -61,7 +60,7 @@ public class AddStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
 
-        //bind the wiew using butterknife
+        //Bind the wiew using butterknife
         ButterKnife.bind(this);
 
         //init realm
