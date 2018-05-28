@@ -19,7 +19,9 @@ android {
 
     }
 }
-
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 dependencies {
     //Default
     implementation fileTree(dir: 'libs', include: ['*.jar'])
