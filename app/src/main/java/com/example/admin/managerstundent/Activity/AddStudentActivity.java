@@ -105,12 +105,8 @@ public class AddStudentActivity extends AppCompatActivity {
 //        student.setStudentID(nextId);
         student.setName(name.getText().toString());
         student.setName_parent(nameParent.getText().toString());
-        student.setPhone(Integer.parseInt(phone.getText().toString()));
-        student.setChemistry(chemistry.isChecked());
-        student.setMath(math.isChecked());
-        student.setPhysical(physical.isChecked());
+        student.setPhone(phone.getText().toString());
         student.setGrade(Integer.parseInt(grade.getText().toString()));
-
         //Cover String to Date
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
