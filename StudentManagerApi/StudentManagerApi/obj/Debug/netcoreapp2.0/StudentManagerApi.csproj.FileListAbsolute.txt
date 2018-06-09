@@ -1,0 +1,11 @@
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\bin\Debug\netcoreapp2.0\StudentManagerApi.deps.json
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\bin\Debug\netcoreapp2.0\StudentManagerApi.runtimeconfig.json
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\bin\Debug\netcoreapp2.0\StudentManagerApi.runtimeconfig.dev.json
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\bin\Debug\netcoreapp2.0\StudentManagerApi.dll
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\obj\Debug\netcoreapp2.0\StudentManagerApi.csprojResolveAssemblyReference.cache
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\obj\Debug\netcoreapp2.0\StudentManagerApi.csproj.CoreCompileInputs.cache
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\obj\Debug\netcoreapp2.0\StudentManagerApi.AssemblyInfoInputs.cache
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\obj\Debug\netcoreapp2.0\StudentManagerApi.AssemblyInfo.cs
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\bin\Debug\netcoreapp2.0\StudentManagerApi.pdb
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\obj\Debug\netcoreapp2.0\StudentManagerApi.dll
+E:\Code\DotNet\StudentManagerApi\StudentManagerApi\obj\Debug\netcoreapp2.0\StudentManagerApi.pdb
