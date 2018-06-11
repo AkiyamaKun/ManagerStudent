@@ -1,6 +1,8 @@
 package com.example.admin.managerstundent.Activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,28 +13,22 @@ import android.view.View;
 
 import com.example.admin.managerstundent.R;
 
-import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 /**
  * Author: DangNHH
  * 19/05/2018
- *
+ * <p>
  * Main Activity Class
  */
-
-//Day la nhanh cua Zetysx
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBarDrawerToggle mToggle;
 
-    //Bind all View
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-
     /**
      * Override On Create
+     *
      * @param savedInstanceState
      */
     @Override
@@ -41,28 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Configuration Realm Default
-        configurationRealmDefault();
-
-        //Init Menu
-        initNavigationMenu();
-    }
-
-    /**
-     * Init Nagigation Menu
-     */
-    private void initNavigationMenu() {
-        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    /**
-     * Configuration Realm Default
-     */
-    private void configurationRealmDefault(){
         Realm.init(getApplicationContext());
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
@@ -71,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
+
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     /**
@@ -81,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
+        if (mToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -92,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
@@ -105,9 +89,32 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void addStudent(View view) {
-        Intent intent = new Intent(this, AddStudentActivity.class);
+        Intent intent = new Intent(this, ManageStudentActivity.class);
         startActivity(intent);
     }
 
+    public void viewTimeTable(View view) {
+        Intent intent = new Intent(this, TableActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_dashboard) {
+
+        } else if (id == R.id.nav_timetable) {
+
+        } else if (id == R.id.nav_classmanagement) {
+
+        } else if (id == R.id.nav_studentmanagent) {
+            Intent intent = new Intent(this, ManageStudentActivity.class);
+            startActivity(intent);
+        } else if(id == R.id.nav_todolist) {
+
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

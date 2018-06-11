@@ -53,6 +53,15 @@ public class Student extends RealmObject {
      */
     private Integer grade;
 
+    public Student() {}
+
+    public Student(Integer studentID, String name, Date birthday, String sex) {
+        this.studentID = studentID;
+        this.name = name;
+        this.birthday = birthday;
+        this.sex = sex;
+    }
+
     /**
      * Getter name
      * @return name
