@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".Activity.TableActivity" />
         <activity android:name=".Activity.ManageStudentActivity"></activity>
+        <activity android:name=".Activity.ListStudentActivity" />
+        <activity android:name=".Activity.StudentDetailActivity"></activity>
     </application>
 
 </manifest>
