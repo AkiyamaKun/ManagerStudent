@@ -110,16 +110,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_studentmanagent) {
             Intent intent = new Intent(this, ManageStudentActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_todolist) {
+        } else if(id == R.id.nav_todolist) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void toStudentList(View view) {
-        Intent intent = new Intent(this, ListStudentActivity.class);
-        startActivity(intent);
     }
 }
