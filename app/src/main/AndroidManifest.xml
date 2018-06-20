@@ -15,13 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.AddStudentActivity" />
+        <activity android:name="com.example.admin.managerstudent.Activity.MainActivity" />
+        <activity android:name="com.example.admin.managerstudent.Activity.AddStudentActivity" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name="com.example.admin.managerstudent.Activity.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".Activity.WelcomeActivity"
+            android:name="com.example.admin.managerstudent.Activity.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar">
@@ -35,6 +35,7 @@
         <activity android:name=".Activity.ManageStudentActivity"></activity>
         <activity android:name=".Activity.ListStudentActivity" />
         <activity android:name=".Activity.StudentDetailActivity"></activity>
+        <activity android:name="com.example.admin.managerstudent.Activity.TableActivity" />
     </application>
 
 </manifest>

@@ -40,9 +40,8 @@ dependencies {
     //ButterKnife for BindView
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.3'
+    implementation 'joda-time:joda-time:2.3'
     implementation 'com.github.EunsilJo:TimeTable:1.0'
-
     //Retrofit2 for API
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
