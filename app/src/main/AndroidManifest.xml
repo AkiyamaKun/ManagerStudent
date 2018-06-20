@@ -36,8 +36,11 @@
         <activity android:name=".Activity.ManageStudentActivity"></activity>
         <activity android:name=".Activity.ListStudentActivity" />
         <activity android:name=".Activity.StudentDetailActivity"></activity>
+<<<<<<< HEAD
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> 965b4ba496dfc455d8cfe54ebf1791ca4bb87074
         <activity android:name="com.example.admin.managerstudent.Activity.TableActivity" />
     </application>
 

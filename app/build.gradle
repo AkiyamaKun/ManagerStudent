@@ -2,12 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
+<<<<<<< HEAD
 
     compileSdkVersion 26
+=======
+    compileSdkVersion 27
+>>>>>>> 965b4ba496dfc455d8cfe54ebf1791ca4bb87074
     defaultConfig {
         applicationId "com.example.admin.managerstundent"
-        targetSdkVersion 26
-        minSdkVersion 15
+        targetSdkVersion 27
+        minSdkVersion 16
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,9 +28,16 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
+<<<<<<< HEAD
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
+=======
+    //Default
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+>>>>>>> 965b4ba496dfc455d8cfe54ebf1791ca4bb87074
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
@@ -35,6 +46,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //Card View for Show Data on Table
+<<<<<<< HEAD
+=======
+    implementation 'com.android.support:cardview-v7:27.1.1'
+>>>>>>> 965b4ba496dfc455d8cfe54ebf1791ca4bb87074
 
     //ButterKnife for BindView
     implementation 'com.android.support:cardview-v7:26.1.0'
