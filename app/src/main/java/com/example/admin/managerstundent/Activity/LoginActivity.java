@@ -23,8 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkLogin(View view) {
-        EditText editUser = (EditText) findViewById(R.id.email);
-        EditText editPass = (EditText) findViewById(R.id.password);
+        EditText editUser = (EditText) findViewById(R.id.edt_username);
+        EditText editPass = (EditText) findViewById(R.id.edt_password);
         if(editUser.getText().toString().equals("admin") && editPass.getText().toString().equals("123")) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);

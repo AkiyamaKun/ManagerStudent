@@ -15,7 +15,7 @@ import com.example.admin.managerstundent.R;
  */
 public class WelcomeActivity extends AppCompatActivity {
 
-    private static final int SWITCH_SCREEN = 3000;
+    private static final int SWITCH_SCREEN = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

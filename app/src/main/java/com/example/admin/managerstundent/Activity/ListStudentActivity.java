@@ -27,11 +27,13 @@ public class ListStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_student);
         listView = findViewById(R.id.listView);
-        adapter = new StudentAdapter();
+
         dtos = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            dtos.add(new StudentDTO(i, ((i % 2 == 0) ? "male" : "female") + " " + i));
+            dtos.add(new StudentDTO(i,"https://picsum.photos/70/70/?image="+(i*50+6), ((i % 2 == 0) ? "Male Student" : "Female Student") + " " + i,
+                    (i%3==1)? 9 : 11, (i%3==2)? "10A" : "11B"));
         }
+        adapter = new StudentAdapter(dtos, ListStudentActivity.this);
         adapter.setDtos(dtos);
         listView.setAdapter(adapter);
         SwipeMenuCreator creator = new SwipeMenuCreator() {
