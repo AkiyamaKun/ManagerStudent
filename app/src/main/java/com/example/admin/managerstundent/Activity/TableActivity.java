@@ -1,8 +1,12 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,6 +40,36 @@ public class TableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_table);
         timeTable = (TimeTableView)findViewById(R.id.timetabledummy);
         initData();
+        BottomNavigationView bar = findViewById(R.id.bottom_navigation);
+        bar.setSelectedItemId(R.id.nav_timetable);
+        bar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.nav_dashboard:
+                        Intent intent = new Intent(TableActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.nav_timetable:
+                        Intent intent2 = new Intent(TableActivity.this, TableActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        break;
+                    case R.id.nav_studentmanagent:
+                        Intent intent3 = new Intent(TableActivity.this, ListStudentActivity.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+                    case R.id.nav_todolist:
+                        Intent intent4 = new Intent(TableActivity.this, ManageStudentActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void initData(){

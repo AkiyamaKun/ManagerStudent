@@ -3,8 +3,12 @@ package com.example.admin.managerstundent.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -35,6 +39,36 @@ public class ListStudentActivity extends AppCompatActivity {
         }
         adapter = new StudentAdapter(dtos, ListStudentActivity.this);
         adapter.setDtos(dtos);
+        BottomNavigationView bar = findViewById(R.id.bottom_navigation);
+        bar.setSelectedItemId(R.id.nav_studentmanagent);
+        bar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.nav_dashboard:
+                        Intent intent = new Intent(ListStudentActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.nav_timetable:
+                        Intent intent2 = new Intent(ListStudentActivity.this, TableActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        break;
+                    case R.id.nav_studentmanagent:
+                        Intent intent3 = new Intent(ListStudentActivity.this, ListStudentActivity.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+                    case R.id.nav_todolist:
+                        Intent intent4 = new Intent(ListStudentActivity.this, ManageStudentActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
         listView.setAdapter(adapter);
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -77,5 +111,10 @@ public class ListStudentActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void addStudent(View view) {
+        Intent intent = new Intent(this, AddStudentActivity.class);
+        startActivity(intent);
     }
 }

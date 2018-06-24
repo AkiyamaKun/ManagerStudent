@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.admin.managerstundent.DTO.StudentDTO;
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.CircleTransform;
+import com.polyak.iconswitch.IconSwitch;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -53,6 +54,10 @@ public class StudentAdapter extends BaseAdapter {
         TextView age = convertView.findViewById(R.id.txtAge);
         TextView grade = convertView.findViewById(R.id.txtGrade);
         ImageView img = convertView.findViewById(R.id.img);
+        IconSwitch iconSwich = convertView.findViewById(R.id.icon_switch);
+        if(dto.getId()%4==1) {
+            iconSwich.setActivated(false);
+        }
         Picasso.with(mContext)
                 .load(dto.getUrl())
                 .transform(new CircleTransform())

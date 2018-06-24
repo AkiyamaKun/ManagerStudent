@@ -15,11 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.AddStudentActivity" />
+        <activity android:name=".Activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Activity.AddStudentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Activity.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -31,10 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.TableActivity" />
-        <activity android:name=".Activity.ManageStudentActivity"></activity>
-        <activity android:name=".Activity.ListStudentActivity" />
-        <activity android:name=".Activity.StudentDetailActivity"></activity>
+        <activity android:name=".Activity.TableActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.ManageStudentActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Activity.ListStudentActivity"  android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.StudentDetailActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
