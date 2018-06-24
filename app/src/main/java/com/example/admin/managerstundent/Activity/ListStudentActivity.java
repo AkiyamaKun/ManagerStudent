@@ -41,12 +41,12 @@ public class ListStudentActivity extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
-                openItem.setBackground(new ColorDrawable(Color.GREEN));
+                openItem.setBackground(new ColorDrawable(Color.WHITE));
                 openItem.setIcon(R.drawable.ic_edit);
                 openItem.setWidth(90);
                 menu.addMenuItem(openItem);
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                deleteItem.setBackground(new ColorDrawable(Color.RED));
+                deleteItem.setBackground(new ColorDrawable(Color.WHITE));
                 deleteItem.setIcon(R.drawable.ic_delete);
                 deleteItem.setWidth(90);
                 menu.addMenuItem(deleteItem);

@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.example.admin.managerstundent"
         targetSdkVersion 26
-        minSdkVersion 15
+        minSdkVersion 16
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -59,6 +59,8 @@ dependencies {
     implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     //custom button
     implementation 'com.github.medyo:fancybuttons:1.8.4'
+    //custom swithc
+    implementation 'com.polyak:icon-switch:1.0.0'
 
 
 }

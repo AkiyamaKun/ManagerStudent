@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.admin.managerstundent.DTO.StudentDTO;
 import com.example.admin.managerstundent.R;
+import com.example.admin.managerstundent.Ultils.CircleTransform;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -54,6 +55,7 @@ public class StudentAdapter extends BaseAdapter {
         ImageView img = convertView.findViewById(R.id.img);
         Picasso.with(mContext)
                 .load(dto.getUrl())
+                .transform(new CircleTransform())
                 .into(img);
         id.setText(dto.getId().toString());
         name.setText(dto.getName());
