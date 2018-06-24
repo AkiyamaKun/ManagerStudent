@@ -40,41 +40,16 @@ public class ListStudentActivity extends AppCompatActivity {
 
             @Override
             public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
-                // set item width
+                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
+                openItem.setBackground(new ColorDrawable(Color.GREEN));
+                openItem.setIcon(R.drawable.ic_edit);
                 openItem.setWidth(90);
-                // set item title
-                openItem.setTitle("EDIT");
-                // set item title fontsize
-                openItem.setTitleSize(20);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
                 menu.addMenuItem(openItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
+                deleteItem.setBackground(new ColorDrawable(Color.RED));
+                deleteItem.setIcon(R.drawable.ic_delete);
                 deleteItem.setWidth(90);
-                // set a icon
-                deleteItem.setTitle("DELETE");
-                // set item title fontsize
-                deleteItem.setTitleSize(20);
-                // set item title font color
-                deleteItem.setTitleColor(Color.RED);
-                // add to menu
                 menu.addMenuItem(deleteItem);
-
-
             }
         };
 
