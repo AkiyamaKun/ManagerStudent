@@ -3,8 +3,12 @@ package com.example.admin.managerstundent.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -27,52 +31,59 @@ public class ListStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_student);
         listView = findViewById(R.id.listView);
-        adapter = new StudentAdapter();
+
         dtos = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            dtos.add(new StudentDTO(i, ((i % 2 == 0) ? "male" : "female") + " " + i));
+            dtos.add(new StudentDTO(i,"https://picsum.photos/70/70/?image="+(i*50+6), ((i % 2 == 0) ? "Male Student" : "Female Student") + " " + i,
+                    (i%3==1)? 9 : 11, (i%3==2)? "10A" : "11B"));
         }
+        adapter = new StudentAdapter(dtos, ListStudentActivity.this);
         adapter.setDtos(dtos);
+        BottomNavigationView bar = findViewById(R.id.bottom_navigation);
+        bar.setSelectedItemId(R.id.nav_studentmanagent);
+        bar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.nav_dashboard:
+                        Intent intent = new Intent(ListStudentActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.nav_timetable:
+                        Intent intent2 = new Intent(ListStudentActivity.this, TableActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        break;
+                    case R.id.nav_studentmanagent:
+                        Intent intent3 = new Intent(ListStudentActivity.this, ListStudentActivity.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+                    case R.id.nav_todolist:
+                        Intent intent4 = new Intent(ListStudentActivity.this, ManageStudentActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
         listView.setAdapter(adapter);
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
-                // set item width
+                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
+                openItem.setBackground(new ColorDrawable(Color.WHITE));
+                openItem.setIcon(R.drawable.ic_edit);
                 openItem.setWidth(90);
-                // set item title
-                openItem.setTitle("EDIT");
-                // set item title fontsize
-                openItem.setTitleSize(20);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
                 menu.addMenuItem(openItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
+                deleteItem.setBackground(new ColorDrawable(Color.WHITE));
+                deleteItem.setIcon(R.drawable.ic_delete);
                 deleteItem.setWidth(90);
-                // set a icon
-                deleteItem.setTitle("DELETE");
-                // set item title fontsize
-                deleteItem.setTitleSize(20);
-                // set item title font color
-                deleteItem.setTitleColor(Color.RED);
-                // add to menu
                 menu.addMenuItem(deleteItem);
-
-
             }
         };
 
@@ -100,5 +111,10 @@ public class ListStudentActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void addStudent(View view) {
+        Intent intent = new Intent(this, AddStudentActivity.class);
+        startActivity(intent);
     }
 }

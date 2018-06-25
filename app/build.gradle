@@ -52,4 +52,14 @@ dependencies {
     implementation 'de.codecrafters.tableview:tableview:2.8.0'
 
 
+    // Picasso for image
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //custom toast
+    implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+    //custom button
+    implementation 'com.github.medyo:fancybuttons:1.8.4'
+    //custom swithc
+    implementation 'com.polyak:icon-switch:1.0.0'
+
+
 }

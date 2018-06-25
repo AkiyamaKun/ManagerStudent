@@ -4,33 +4,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
-
+            android:icon="@drawable/ic_paid"
             android:title="Dashboard" />
         <item
             android:id="@+id/nav_timetable"
-
+            android:icon="@drawable/ic_paid"
             android:title="Timetable" />
-        <item
-            android:id="@+id/nav_classmanagement"
-
-            android:title="Class Management" />
+        <!--<item-->
+            <!--android:id="@+id/nav_classmanagement"-->
+            <!--android:icon="@drawable/ic_paid"-->
+            <!--android:title="Class" />-->
         <item
             android:id="@+id/nav_studentmanagent"
-
-            android:title="Student Management" />
+            android:icon="@drawable/ic_paid"
+            android:title="Student" />
         <item
             android:id="@+id/nav_todolist"
-
-            android:title="To do List"
+            android:icon="@drawable/ic_paid"
+            android:title="To do"
             />
     </group>
-
-    <item android:title="Author">
-        <menu>
-            <item
-                android:id="@+id/nav_send"
-
-                android:title="Akiyama" />
-        </menu>
-    </item>
 </menu>

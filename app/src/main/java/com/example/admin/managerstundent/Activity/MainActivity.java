@@ -2,6 +2,7 @@ package com.example.admin.managerstundent.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +23,7 @@ import io.realm.RealmConfiguration;
  * <p>
  * Main Activity Class
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity  {
 
     private ActionBarDrawerToggle mToggle;
 
@@ -36,6 +37,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BottomNavigationView bar = findViewById(R.id.bottom_navigation);
+        bar.setSelectedItemId(R.id.nav_dashboard);
+        bar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.nav_dashboard:
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.nav_timetable:
+                        Intent intent2 = new Intent(MainActivity.this, TableActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        break;
+                    case R.id.nav_studentmanagent:
+                        Intent intent3 = new Intent(MainActivity.this, ListStudentActivity.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+                    case R.id.nav_todolist:
+                        Intent intent4 = new Intent(MainActivity.this, ManageStudentActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
         //Configuration Realm Default
         Realm.init(getApplicationContext());
 
@@ -46,13 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -73,15 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /**
      * Excute when user click on button "Back" on the Phone
      */
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 
     /**
      * Excute when user click on button "Add Student" on Dashboard
@@ -98,23 +114,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_dashboard) {
 
-        } else if (id == R.id.nav_timetable) {
 
-        } else if (id == R.id.nav_classmanagement) {
-
-        } else if (id == R.id.nav_studentmanagent) {
-            Intent intent = new Intent(this, ManageStudentActivity.class);
-            startActivity(intent);
-        } else if(id == R.id.nav_todolist) {
-
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    public void toStudentList(View view) {
+        Intent intent = new Intent(this, ListStudentActivity.class);
+        startActivity(intent);
     }
 }
