@@ -1,10 +1,12 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -29,6 +31,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
     StudentAdapter adapter;
     SearchView searchView;
     List<StudentDTO> dtos;
+    private AlertDialog.Builder alertBuilder;
     String lastName[] = {"Tran", "Le", "Nguyen"};
     String middleName[] = {"Thi", "Van", "Quoc", "Ngoc"};
     String firstName[] = {"Phuong", "Anh", "Luong", "Nam", "Triet"};
@@ -51,6 +54,9 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                 return false;
             }
         });
+
+        alertBuilder = new AlertDialog.Builder(this);
+
 
         dtos = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
@@ -113,6 +119,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                final int positiondelete = position;
                 switch (index) {
                     case 0:
                         Intent intent = new Intent(ListStudentActivity.this, StudentDetailActivity.class);
@@ -121,8 +128,22 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                         startActivity(intent);
                         break;
                     case 1:
-                        dtos.remove(position);
-                        adapter.notifyDataSetChanged();
+                        alertBuilder.setTitle("Delete Student")
+                                .setIcon(R.drawable.ic_delete)
+                                .setMessage("Are You Sure ?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dtos.remove(positiondelete);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // do nothing
+                                    }
+                                })
+                                .show();
+
                         break;
                 }
                 // false : close the menu; true : not close the menu
