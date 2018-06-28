@@ -82,6 +82,7 @@ public class StudentAdapter extends BaseAdapter implements Filterable {
     }
 
     public void setDtos(List<StudentDTO> dtos) {
+        this.original = dtos;
         this.dtos = dtos;
     }
 

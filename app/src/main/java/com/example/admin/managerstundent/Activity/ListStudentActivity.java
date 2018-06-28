@@ -1,11 +1,14 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -54,6 +58,15 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             public boolean onQueryTextChange(String newText) {
                 ((Filterable)adapter).getFilter().filter(searchView.getQuery(), ListStudentActivity.this);
                 return false;
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchView.clearFocus();
+                adapter.setDtos(dtos);
+                adapter.notifyDataSetChanged();
+                return true;
             }
         });
 
