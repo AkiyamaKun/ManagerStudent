@@ -6,6 +6,7 @@
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_paid"
             android:title="Dashboard" />
+
         <item
             android:id="@+id/nav_timetable"
             android:icon="@drawable/ic_paid"

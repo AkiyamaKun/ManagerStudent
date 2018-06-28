@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.admin.managerstundent.R;
+import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
 import com.github.eunsiljo.timetablelib.data.TimeData;
 import com.github.eunsiljo.timetablelib.data.TimeGridData;
 import com.github.eunsiljo.timetablelib.data.TimeTableData;
@@ -70,6 +71,8 @@ public class TableActivity extends AppCompatActivity {
                 return false;
             }
         });
+        BottomNavigationViewHelper.disableShiftMode(bar);
+        bar.getMenu().getItem(1).setChecked(true);
     }
 
     private void initData(){

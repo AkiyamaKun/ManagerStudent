@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
@@ -22,6 +23,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.admin.managerstundent.Adapter.StudentAdapter;
 import com.example.admin.managerstundent.DTO.StudentDTO;
 import com.example.admin.managerstundent.R;
+import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +97,8 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                 return false;
             }
         });
+        BottomNavigationViewHelper.disableShiftMode(bar);
+        bar.getMenu().getItem(2).setChecked(true);
         listView.setAdapter(adapter);
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 

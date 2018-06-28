@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.admin.managerstundent.R;
+import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity  {
                 return false;
             }
         });
+        BottomNavigationViewHelper.disableShiftMode(bar);
+        bar.getMenu().getItem(0).setChecked(true);
         //Configuration Realm Default
         Realm.init(getApplicationContext());
 

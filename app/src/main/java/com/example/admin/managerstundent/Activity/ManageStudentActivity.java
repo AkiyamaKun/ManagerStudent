@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.admin.managerstundent.Entity.Student;
 import com.example.admin.managerstundent.R;
+import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,6 +80,8 @@ public class ManageStudentActivity extends AppCompatActivity {
                 return false;
             }
         });
+        BottomNavigationViewHelper.disableShiftMode(bar);
+        bar.getMenu().getItem(3).setChecked(true);
     }
 
     public class StudentAdapter extends TableDataAdapter<Student> {
