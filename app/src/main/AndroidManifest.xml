@@ -50,7 +50,8 @@
         <activity
             android:name=".Activity.StudentDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.EditStudentActivity"></activity>
+        <activity android:name=".Activity.EditStudentActivity"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>
