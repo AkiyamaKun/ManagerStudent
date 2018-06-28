@@ -6,13 +6,15 @@ public class StudentDTO {
     private String name;
     private Integer age;
     private String grade;
+    private boolean paid;
 
-    public StudentDTO(Integer id, String url, String name, Integer age, String grade) {
+    public StudentDTO(Integer id, String url, String name, Integer age, String grade, boolean paid) {
         this.id = id;
         this.url = url;
         this.name = name;
         this.age = age;
         this.grade = grade;
+        this.paid = paid;
     }
 
     public Integer getId() {
@@ -53,5 +55,13 @@ public class StudentDTO {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }

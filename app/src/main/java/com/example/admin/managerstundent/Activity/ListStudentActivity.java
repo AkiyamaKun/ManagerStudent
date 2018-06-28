@@ -60,8 +60,8 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
 
         dtos = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            dtos.add(new StudentDTO(i,"https://picsum.photos/70/70/?image="+(i*50+1), lastName[i%3] + " " + middleName[i%4] + " " + firstName[i%5],
-                    (i%3==1)? 9 : 11, (i%3==2)? "10A" : "11B"));
+            dtos.add(new StudentDTO(i,"https://picsum.photos/60/60/?image="+(i*50+2), lastName[i%3] + " " + middleName[i%4] + " " + firstName[i%5],
+                    (i%3==1)? 9 : 11, (i%3==2)? "10A" : "11B", (i%4==0) ? false: true));
         }
         adapter = new StudentAdapter(dtos, ListStudentActivity.this);
         adapter.setDtos(dtos);

@@ -61,8 +61,10 @@ public class StudentAdapter extends BaseAdapter implements Filterable {
         TextView grade = convertView.findViewById(R.id.txtGrade);
         ImageView img = convertView.findViewById(R.id.img);
         IconSwitch iconSwich = convertView.findViewById(R.id.icon_switch);
-        if(dto.getId()%4==1) {
-            iconSwich.setActivated(false);
+        if(dto.isPaid()) {
+            iconSwich.setChecked(IconSwitch.Checked.LEFT);
+        } else {
+            iconSwich.setChecked(IconSwitch.Checked.RIGHT);
         }
         Picasso.with(mContext)
                 .load(dto.getUrl())
