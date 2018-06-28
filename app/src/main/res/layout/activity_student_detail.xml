@@ -4,57 +4,165 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".Activity.StudentDetailActivity">
+    <View
+        android:background="@color/color_table_6"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
     <ImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_toRightOf="@+id/img"
-        android:id="@+id/txtID"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imageViewUser"
+        android:layout_width="115dp"
+        android:layout_height="122dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_error_outline_white_18dp"
+        android:layout_marginTop="85dp"
+        tools:ignore="VectorDrawableCompat" />
+    <ImageView
+        android:id="@+id/imgPaid"
+        android:layout_toRightOf="@+id/imageViewUser"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_paid_detail"
+        android:layout_marginTop="135dp"
+        tools:ignore="VectorDrawableCompat"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/imgNotPaid"
+        android:layout_toRightOf="@+id/imageViewUser"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_nopaid_detail"
+        android:layout_marginTop="135dp"
+        tools:ignore="VectorDrawableCompat"
         android:visibility="gone"/>
     <TextView
-        android:id="@+id/txtName"
-        android:layout_toRightOf="@+id/img"
-        android:text="Name"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/txtAge"
-        android:layout_toRightOf="@+id/img"
-        android:layout_below="@+id/txtName"
-        android:text="Age: 15"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/txt"
-        android:layout_toRightOf="@+id/img"
-        android:layout_below="@+id/txtAge"
-        android:text="Class: 10A"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/txtdes"
-        android:layout_below="@+id/img"
-        android:text="OTHER INFO....OTHER INFO....OTHER INFO....OTHER INFO....OTHER INFO....OTHER INFO....OTHER INFO...."
-        android:textSize="30sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:textSize="30dp"
+        android:id="@+id/txtUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="RETROFIT HERE WITH ID TO GET ALL STUDENT DETAIL"/>
-
+        android:text="ten"
+        android:textSize="20dp"
+        android:layout_below="@+id/imageViewUser"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/user_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/txtUsername"
+        android:layout_marginTop="28dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp">
+            <ImageView
+                android:id="@+id/picture_fullname"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_phone"/>
+            <TextView
+                android:id="@+id/txtFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/picture_fullname"
+                android:layout_toRightOf="@+id/picture_fullname"
+                android:text="0968 588 458"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/user_birthday"
+        android:layout_marginTop="1sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/user_fullname">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp">
+            <ImageView
+                android:id="@+id/picture_birthday"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_birthday"/>
+            <TextView
+                android:id="@+id/txtBirthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/picture_birthday"
+                android:layout_toRightOf="@+id/picture_birthday"
+                android:text="25/12/2003"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/user_genre"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1sp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/user_birthday">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+            <ImageView
+                android:id="@+id/picture_genre"
+                android:layout_width="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_gender"/>
+            <TextView
+                android:id="@+id/txtGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/picture_genre"
+                android:layout_toRightOf="@+id/picture_genre"
+                android:text="Male"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/user_age"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="1sp"
+        android:layout_below="@+id/user_genre">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp">
+            <ImageView
+                android:id="@+id/picture_class"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_class"/>
+            <TextView
+                android:id="@+id/txtClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/picture_class"
+                android:layout_toRightOf="@+id/picture_class"
+                android:text="Class"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

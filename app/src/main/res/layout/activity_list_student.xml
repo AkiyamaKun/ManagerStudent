@@ -9,7 +9,6 @@
     <android.support.v7.widget.SearchView
         android:id="@+id/seek_bar"
         app:queryHint="Type to search"
-        app:iconifiedByDefault="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -31,7 +30,7 @@
         android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="3sp"
+        android:dividerHeight="1sp"
         android:minHeight="40dp"/>
 
     <android.support.design.widget.FloatingActionButton
@@ -41,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_menu_add"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:srcCompat="@android:drawable/ic_input_add"
         android:onClick="addStudent"/>
 
     <android.support.design.widget.BottomNavigationView

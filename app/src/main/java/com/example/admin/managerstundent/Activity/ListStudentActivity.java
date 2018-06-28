@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -63,13 +64,10 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                searchView.clearFocus();
-                adapter.setDtos(dtos);
-                adapter.notifyDataSetChanged();
                 return true;
             }
         });
-
+        searchView.clearFocus();
         alertBuilder = new AlertDialog.Builder(this);
 
 
@@ -139,7 +137,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                 final int positiondelete = position;
                 switch (index) {
                     case 0:
-                        Intent intent = new Intent(ListStudentActivity.this, StudentDetailActivity.class);
+                        Intent intent = new Intent(ListStudentActivity.this, EditStudentActivity.class);
                         intent.putExtra("id", dtos.get(position).getId().toString());
                         intent.putExtra("name", dtos.get(position).getName().toString());
                         startActivity(intent);
@@ -167,6 +165,17 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                 return false;
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                StudentDTO dto = adapter.getDtos().get(position);
+                Intent intent =  new Intent(ListStudentActivity.this, StudentDetailActivity.class);
+                intent.putExtra("name", dto.getName());
+                intent.putExtra("paid", dto.isPaid());
+                intent.putExtra("class", dto.getGrade());
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -179,5 +188,16 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
     @Override
     public void onFilterComplete(int count) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+            ((Filterable)adapter).getFilter().filter(" ", ListStudentActivity.this);
+            searchView.clearFocus();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

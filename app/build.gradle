@@ -61,6 +61,7 @@ dependencies {
     implementation 'com.github.medyo:fancybuttons:1.8.4'
     //custom swithc
     implementation 'com.polyak:icon-switch:1.0.0'
-
+// Circle Image
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 }

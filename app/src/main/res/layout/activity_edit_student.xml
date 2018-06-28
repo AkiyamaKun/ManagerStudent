@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    app:ignore="NamespaceTypo">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+    <TextView
+        android:id="@+id/txtTitleStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Student"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img"
+            android:layout_width="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"
+            android:onClick="onChooseImage"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Name"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_name" />
+
+        <EditText
+            android:id="@+id/edit_test_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:defaultFocusHighlightEnabled="true"
+            android:ems="10"
+            android:text="Nguyen Van Xuong"
+            android:inputType="textPersonName" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtBirthDay"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Birthday"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_birthday" />
+
+        <EditText
+            android:id="@+id/edit_test_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="25/12/2003"
+            android:inputType="date" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtGrade"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Grade"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_class" />
+
+        <EditText
+            android:id="@+id/edit_test_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="10B"
+            android:inputType="number" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtSubject"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="Subject"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_subject" />
+
+            <CheckBox
+                android:id="@+id/chb_math"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Math" />
+
+            <CheckBox
+                android:checked="true"
+                android:id="@+id/chb_physical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Physics" />
+
+            <CheckBox
+                android:id="@+id/chb_chemistry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chemist" />
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNameParent"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Name Parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_gender" />
+
+        <EditText
+            android:id="@+id/edit_test_name_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="Aliusgender"
+            android:inputType="textPersonName" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtPhone"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:text="Phone"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_phone" />
+
+        <EditText
+            android:id="@+id/edit_test_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="0959 452 325"
+            android:inputType="phone" />
+    </TableRow>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btnReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:onClick="ClickOnReset"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="Edit Student"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_fontIconResource="&#xf234;"
+        fancy:fb_radius="30dp" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:onClick="clickToCancel"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="Back to student List"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_fontIconResource="&#xf04a;"
+        fancy:fb_radius="30dp" />
+    </LinearLayout>
+</ScrollView>

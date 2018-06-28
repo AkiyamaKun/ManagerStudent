@@ -40,6 +40,7 @@ public class TableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
         timeTable = (TimeTableView)findViewById(R.id.timetabledummy);
+        timeTable.setStartHour(6);
         initData();
         BottomNavigationView bar = findViewById(R.id.bottom_navigation);
         bar.setSelectedItemId(R.id.nav_timetable);
@@ -82,8 +83,9 @@ public class TableActivity extends AppCompatActivity {
         timeTable.setShowHeader(true);
         timeTable.setTableMode(TimeTableView.TableMode.SHORT);
         DateTime now = DateTime.now();
-        long mNow = now.withTimeAtStartOfDay().getMillis();
-        ArrayList<TimeTableData> dataTimeTable = getSamples(mNow, mHeaders, mTitles);
+        long mNow = getMillis("2018-06-29 03:00:00");
+       // ArrayList<TimeTableData> dataTimeTable = getSamples(mNow, mHeaders, mTitles);
+        ArrayList<TimeTableData> dataTimeTable = initDetailData();
         timeTable.setTimeTable(mNow, dataTimeTable);
         timeTable.setOnTimeItemClickListener(new TimeTableItemViewHolder.OnTimeItemClickListener() {
             @Override
@@ -99,7 +101,6 @@ public class TableActivity extends AppCompatActivity {
 
     private ArrayList<TimeTableData> getSamples(long date, List<String> headers, List<String> titles){
         TypedArray colors_table = getResources().obtainTypedArray(R.array.colors_table);
-        TypedArray colors_table_light = getResources().obtainTypedArray(R.array.colors_table_light);
 
         ArrayList<TimeTableData> tables = new ArrayList<>();
         for(int i=0; i<headers.size(); i++){
@@ -126,16 +127,16 @@ public class TableActivity extends AppCompatActivity {
     private ArrayList<TimeTableData> initDetailData(){
         ArrayList<TimeTableData> dataGrid = new ArrayList<>();
         ArrayList<TimeData> values = new ArrayList<>();
-        values.add(new TimeData(0, "Japanese", R.color.color_table_1_light, getMillis("2018-05-27 04:00:00"), getMillis("2018-05-27 05:00:00")));
-        values.add(new TimeData(1, "English", R.color.color_table_2_light, getMillis("2018-05-27 07:00:00"), getMillis("2018-05-27 08:00:00")));
+        values.add(new TimeData(0, "Japanese", R.color.color_table_1, getMillis("2018-06-29 11:00:00"), getMillis("2018-06-29 13:00:00")));
+        values.add(new TimeData(1, "English", R.color.color_table_2, getMillis("2018-06-29 07:00:00"), getMillis("2018-06-29 09:00:00")));
 
         ArrayList<TimeData> values2 = new ArrayList<>();
-        values2.add(new TimeData(0, "Japanese", R.color.color_table_1_light, getMillis("2018-05-27 03:00:00"), getMillis("2018-05-27 06:00:00")));
-        values2.add(new TimeData(1, "English", R.color.color_table_2_light, getMillis("2018-05-27 07:30:00"), getMillis("2018-05-27 08:30:00")));
-        values2.add(new TimeData(2, "Math", R.color.color_table_3_light, getMillis("2018-05-27 11:40:00"), getMillis("2018-05-27 11:45:00")));
-        values2.add(new TimeData(4, "Physics", R.color.color_table_5_light, getMillis("2018-05-27 20:00:00"), getMillis("2018-05-27 21:30:00")));
-        values2.add(new TimeData(5, "Chemistry", R.color.color_table_6_light, getMillis("2018-05-27 21:31:00"), getMillis("2018-05-27 22:45:00")));
-        values2.add(new TimeData(6, "Biology", R.color.color_table_7_light, getMillis("2018-05-27 23:00:00"), getMillis("2018-05-28 02:30:00")));
+        values.add(new TimeData(0, "Japanese", R.color.color_table_1, getMillis("2018-06-29 13:30:00"), getMillis("2018-06-29 15:00:00")));
+        values2.add(new TimeData(1, "English", R.color.color_table_2, getMillis("2018-06-29 07:30:00"), getMillis("2018-06-29 09:30:00")));
+        values2.add(new TimeData(2, "Math 9", R.color.color_table_3, getMillis("2018-06-29 11:40:00"), getMillis("2018-06-29 13:45:00")));
+        values2.add(new TimeData(4, "Physics 10", R.color.color_table_5, getMillis("2018-06-29 14:00:00"), getMillis("2018-06-29 15:30:00")));
+        values.add(new TimeData(5, "Chemistry 11", R.color.color_table_6, getMillis("2018-06-29 16:30:00"), getMillis("2018-06-29 18:00:00")));
+        values.add(new TimeData(6, "Biology 11", R.color.color_table_7, getMillis("2018-06-29 13:30:00"), getMillis("2018-06-29 15:45:00")));
 
         ArrayList<TimeTableData> tables = new ArrayList<>();
         tables.add(new TimeTableData("Sun", values));
@@ -145,7 +146,6 @@ public class TableActivity extends AppCompatActivity {
         tables.add(new TimeTableData("Thu", values));
         tables.add(new TimeTableData("Fri", values2));
         tables.add(new TimeTableData("Sat", values));
-
         dataGrid.addAll(tables);
         return dataGrid;
     }
