@@ -72,10 +72,11 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="10dp"
-                fancy:fb_borderColor="#FFFFFF"
-                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_borderColor="@color/colorPrimary"
+                fancy:fb_defaultColor="#FFFFFF"
+                fancy:fb_textColor = "@color/colorPrimary"
                 fancy:fb_fontIconResource="&#xf0fe;"
-                fancy:fb_borderWidth="1dp"
+                fancy:fb_borderWidth="3dp"
                 fancy:fb_radius="30dp" />
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>

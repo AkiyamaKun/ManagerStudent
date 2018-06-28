@@ -1,10 +1,13 @@
 package com.example.admin.managerstundent.Adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,14 +19,17 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class StudentAdapter extends BaseAdapter {
+public class StudentAdapter extends BaseAdapter implements Filterable {
     private List<StudentDTO> dtos;
+    private List<StudentDTO> original;
     private Context mContext;
 
     public StudentAdapter(List<StudentDTO> dtos, Context mContext) {
         this.dtos = dtos;
+        this.original = dtos;
         this.mContext = mContext;
     }
 
@@ -75,5 +81,40 @@ public class StudentAdapter extends BaseAdapter {
 
     public void setDtos(List<StudentDTO> dtos) {
         this.dtos = dtos;
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                if (!TextUtils.isEmpty(constraint)) {
+
+                    // Retrieve the autocomplete results.
+                    List<StudentDTO> searchData = new ArrayList<>();
+
+                    for (StudentDTO dto : original) {
+                        if (dto.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            searchData.add(dto);
+                        }
+                    }
+
+                    // Assign the data to the FilterResults
+                    filterResults.values = searchData;
+                    filterResults.count = searchData.size();
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                if (results.values != null) {
+                    dtos = (List<StudentDTO>) results.values;
+                    notifyDataSetChanged();
+                }
+            }
+        };
+        return filter;
     }
 }

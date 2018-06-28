@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Name"
             android:textSize="20dp"
+            android:textStyle="bold"
             android:layout_marginLeft="15dp" />
         <TextView
             android:id="@+id/txtAge"
@@ -36,6 +37,7 @@
             android:layout_below="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/sad"
             android:layout_marginLeft="15dp" />
         <TextView
             android:id="@+id/txtGrade"
@@ -43,6 +45,7 @@
             android:layout_below="@+id/txtName"
             android:layout_toRightOf="@+id/txtAge"
             android:layout_marginLeft="15dp"
+            android:textColor="@color/sad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -52,7 +55,8 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:isw_icon_size="20dp"
+        app:isw_icon_size="15dp"
+        android:layout_centerVertical="true"
         app:isw_background_color="@color/color_table_6_light"
         app:isw_thumb_color_left="@color/color_table_7"
         app:isw_thumb_color_right="@color/color_table_5"
