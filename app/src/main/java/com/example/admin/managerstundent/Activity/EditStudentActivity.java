@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.CircleTransform;
@@ -36,12 +37,20 @@ public class EditStudentActivity extends AppCompatActivity {
         Random r = new Random();
         String url = "https://picsum.photos/250/250/?image=" + r.nextInt(200);
         Picasso.with(getApplicationContext()).load(url).transform(new CircleTransform()).into(img);
+        ((TextView) findViewById(R.id.edit_test_name)).setText(getIntent().getStringExtra("name"));
+        ((TextView) findViewById(R.id.edit_test_phone)).setText(getIntent().getStringExtra("phone"));
+        ((TextView) findViewById(R.id.edit_test_birthday)).setText(getIntent().getStringExtra("birthday"));
+        ((TextView) findViewById(R.id.edit_test_name_parent)).setText(getIntent().getStringExtra("gender"));
+        ((TextView) findViewById(R.id.edit_test_grade)).setText(getIntent().getStringExtra("class"));
     }
 
     public void clickToCancel(View view) {
-        Intent intent = new Intent(this, ListStudentActivity.class);
-        startActivity(intent);
-        finish();
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public void onChooseImage(View view) {

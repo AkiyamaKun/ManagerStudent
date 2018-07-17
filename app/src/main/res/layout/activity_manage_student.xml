@@ -9,7 +9,8 @@
         xmlns:table="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tableView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="600dp"
         table:tableView_columnCount="4" />
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -20,4 +21,16 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/navigation_menu" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:onClick="addClass"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </RelativeLayout>

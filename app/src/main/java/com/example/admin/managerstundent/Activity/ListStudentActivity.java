@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -32,6 +35,7 @@ import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ListStudentActivity extends AppCompatActivity implements Filter.FilterListener {
     SwipeMenuListView listView;
@@ -42,6 +46,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
     String lastName[] = {"Tran", "Le", "Nguyen"};
     String middleName[] = {"Thi", "Van", "Quoc", "Ngoc"};
     String firstName[] = {"Phuong", "Anh", "Luong", "Nam", "Triet"};
+    String subject[] = {"Math 9", "Math 10", "Chemistry 10", "Physics 11"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +54,47 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         setContentView(R.layout.activity_list_student);
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.seek_bar);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+        TextView txt = findViewById(R.id.subject);
 
+        FloatingSearchView fsearchView = findViewById(R.id.floating_search_view);
+        fsearchView.setDimBackground(false);
+        fsearchView.clearSearchFocus();
+        fsearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
             @Override
-            public boolean onQueryTextChange(String newText) {
-                ((Filterable)adapter).getFilter().filter(searchView.getQuery(), ListStudentActivity.this);
-                return false;
+            public void onActionMenuItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.name:
+                        Intent intent = new Intent(ListStudentActivity.this, AddStudentActivity.class);
+                        startActivity(intent);
+                        break;
+                }
             }
         });
+        String className = getIntent().getStringExtra("subject");
+
+        if (className != null) {
+            ((TextView) findViewById(R.id.txt)).setText("Class: " + className);
+            ((TextView) findViewById(R.id.time)).setText("Time: " + getIntent().getStringExtra("time"));
+            txt.setText(txt.getText()+ className);
+        }
+        fsearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
+                ((Filterable) adapter).getFilter().filter(newQuery, ListStudentActivity.this);
+            }
+        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                ((Filterable) adapter).getFilter().filter(searchView.getQuery(), ListStudentActivity.this);
+//                return false;
+//            }
+//        });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
@@ -70,20 +104,33 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         searchView.clearFocus();
         alertBuilder = new AlertDialog.Builder(this);
 
-
+        BottomNavigationView bar = findViewById(R.id.bottom_navigation);
         dtos = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            dtos.add(new StudentDTO(i,"https://picsum.photos/60/60/?image="+(i*50+2), lastName[i%3] + " " + middleName[i%4] + " " + firstName[i%5],
-                    (i%3==1)? 9 : 11, (i%3==2)? "10A" : "11B", (i%4==0) ? false: true));
+        if (className == null) {
+            findViewById(R.id.txtHold).setVisibility(View.GONE);
+            bar.setSelectedItemId(R.id.nav_studentmanagent);
+            for (int i = 0; i < 15; i++) {
+                dtos.add(new StudentDTO(i, "https://picsum.photos/60/60/?image=" + (i * 50 + 2), lastName[i % 3] + " " + middleName[i % 4] + " " + firstName[i % 5],
+                        new Random().nextInt(3) + 15, subject[(i + 2) % 4], (i % 4 == 0) ? false : true));
+            }
+        } else {
+            findViewById(R.id.txtHold).setVisibility(View.VISIBLE);
+            bar.setVisibility(View.GONE);
+            for (int i = 0; i < 5; i++) {
+                dtos.add(new StudentDTO(i, "https://picsum.photos/60/60/?image=" + (i * 50 + 2), lastName[i % 3] + " " + middleName[i % 4] + " " + firstName[i % 5],
+                        new Random().nextInt(3) + 15, className, (i % 4 == 0) ? false : true));
+            }
         }
+
         adapter = new StudentAdapter(dtos, ListStudentActivity.this);
         adapter.setDtos(dtos);
-        BottomNavigationView bar = findViewById(R.id.bottom_navigation);
-        bar.setSelectedItemId(R.id.nav_studentmanagent);
+        adapter.notifyDataSetChanged();
+
+
         bar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()) {
+                switch (item.getItemId()) {
                     case R.id.nav_dashboard:
                         Intent intent = new Intent(ListStudentActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -115,11 +162,11 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
 
             @Override
             public void create(SwipeMenu menu) {
-                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
-                openItem.setBackground(new ColorDrawable(Color.WHITE));
-                openItem.setIcon(R.drawable.ic_edit);
-                openItem.setWidth(90);
-                menu.addMenuItem(openItem);
+//                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
+//                openItem.setBackground(new ColorDrawable(Color.WHITE));
+//                openItem.setIcon(R.drawable.ic_edit);
+//                openItem.setWidth(90);
+//                menu.addMenuItem(openItem);
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 deleteItem.setBackground(new ColorDrawable(Color.WHITE));
                 deleteItem.setIcon(R.drawable.ic_delete);
@@ -136,13 +183,13 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 final int positiondelete = position;
                 switch (index) {
+//                    case 0:
+//                        Intent intent = new Intent(ListStudentActivity.this, EditStudentActivity.class);
+//                        intent.putExtra("id", dtos.get(position).getId().toString());
+//                        intent.putExtra("name", dtos.get(position).getName().toString());
+//                        startActivity(intent);
+//                        break;
                     case 0:
-                        Intent intent = new Intent(ListStudentActivity.this, EditStudentActivity.class);
-                        intent.putExtra("id", dtos.get(position).getId().toString());
-                        intent.putExtra("name", dtos.get(position).getName().toString());
-                        startActivity(intent);
-                        break;
-                    case 1:
                         alertBuilder.setTitle("Delete Student")
                                 .setIcon(R.drawable.ic_delete)
                                 .setMessage("Are You Sure ?")
@@ -169,7 +216,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 StudentDTO dto = adapter.getDtos().get(position);
-                Intent intent =  new Intent(ListStudentActivity.this, StudentDetailActivity.class);
+                Intent intent = new Intent(ListStudentActivity.this, StudentDetailActivity.class);
                 intent.putExtra("name", dto.getName());
                 intent.putExtra("paid", dto.isPaid());
                 intent.putExtra("class", dto.getGrade());
@@ -194,7 +241,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
     public void onBackPressed() {
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
-            ((Filterable)adapter).getFilter().filter(" ", ListStudentActivity.this);
+            ((Filterable) adapter).getFilter().filter(" ", ListStudentActivity.this);
             searchView.clearFocus();
         } else {
             super.onBackPressed();

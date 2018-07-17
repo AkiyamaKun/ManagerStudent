@@ -1,6 +1,7 @@
 package com.example.admin.managerstundent.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -37,6 +38,9 @@ public class TableActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences seision = this.getSharedPreferences("Login", 0);
+        SharedPreferences.Editor editor= seision.edit();
+        editor.apply();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
         timeTable = (TimeTableView)findViewById(R.id.timetabledummy);
@@ -127,16 +131,16 @@ public class TableActivity extends AppCompatActivity {
     private ArrayList<TimeTableData> initDetailData(){
         ArrayList<TimeTableData> dataGrid = new ArrayList<>();
         ArrayList<TimeData> values = new ArrayList<>();
-        values.add(new TimeData(0, "Japanese", R.color.color_table_1, getMillis("2018-06-29 11:00:00"), getMillis("2018-06-29 13:00:00")));
-        values.add(new TimeData(1, "English", R.color.color_table_2, getMillis("2018-06-29 07:00:00"), getMillis("2018-06-29 09:00:00")));
+        values.add(new TimeData(0, "Japanese", R.color.color_table_1_light, getMillis("2018-06-29 11:00:00"), getMillis("2018-06-29 13:00:00")));
+        values.add(new TimeData(1, "English", R.color.color_table_2_light, getMillis("2018-06-29 07:00:00"), getMillis("2018-06-29 09:00:00")));
 
         ArrayList<TimeData> values2 = new ArrayList<>();
-        values.add(new TimeData(0, "Japanese", R.color.color_table_1, getMillis("2018-06-29 13:30:00"), getMillis("2018-06-29 15:00:00")));
-        values2.add(new TimeData(1, "English", R.color.color_table_2, getMillis("2018-06-29 07:30:00"), getMillis("2018-06-29 09:30:00")));
-        values2.add(new TimeData(2, "Math 9", R.color.color_table_3, getMillis("2018-06-29 11:40:00"), getMillis("2018-06-29 13:45:00")));
-        values2.add(new TimeData(4, "Physics 10", R.color.color_table_5, getMillis("2018-06-29 14:00:00"), getMillis("2018-06-29 15:30:00")));
-        values.add(new TimeData(5, "Chemistry 11", R.color.color_table_6, getMillis("2018-06-29 16:30:00"), getMillis("2018-06-29 18:00:00")));
-        values.add(new TimeData(6, "Biology 11", R.color.color_table_7, getMillis("2018-06-29 13:30:00"), getMillis("2018-06-29 15:45:00")));
+        values.add(new TimeData(0, "Japanese", R.color.color_table_1_light, getMillis("2018-06-29 13:30:00"), getMillis("2018-06-29 15:00:00")));
+        values2.add(new TimeData(1, "English", R.color.color_table_2_light, getMillis("2018-06-29 07:30:00"), getMillis("2018-06-29 09:30:00")));
+        values2.add(new TimeData(2, "Math 9", R.color.color_table_3_light, getMillis("2018-06-29 11:40:00"), getMillis("2018-06-29 13:45:00")));
+        values2.add(new TimeData(4, "Physics 10", R.color.color_table_5_light, getMillis("2018-06-29 14:00:00"), getMillis("2018-06-29 15:30:00")));
+        values.add(new TimeData(5, "Chemistry 11", R.color.color_table_6_light, getMillis("2018-06-29 16:30:00"), getMillis("2018-06-29 18:00:00")));
+        values.add(new TimeData(6, "Biology 11", R.color.color_table_7_light, getMillis("2018-06-29 13:30:00"), getMillis("2018-06-29 15:45:00")));
 
         ArrayList<TimeTableData> tables = new ArrayList<>();
         tables.add(new TimeTableData("Sun", values));

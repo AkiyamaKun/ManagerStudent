@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.AddClassActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="25dp">
+        <TextView
+            android:id="@+id/txtTitleStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New Class"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="25dp"/>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="Name"
+                android:visibility="gone"/>
+            <ImageView
+                android:src="@drawable/ic_name"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Class Name"
+                android:defaultFocusHighlightEnabled="true"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtBirthDay"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="Birthday"
+                android:visibility="gone"/>
+            <ImageView
+                android:src="@drawable/ic_subject"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Subject" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtGrade"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="Grade"
+                android:visibility="gone"/>
+            <ImageView
+                android:src="@drawable/ic_time"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Time Start"
+                android:onClick="changeDate"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none" />
+            <EditText
+                android:id="@+id/edit_time1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:onClick="changeDate"
+                android:hint="Time End"
+                android:inputType="none" />
+            <TextView
+                android:id="@+id/ampm"
+                android:text="AM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="Phone"
+                android:visibility="gone"/>
+            <ImageView
+                android:src="@drawable/ic_weekday"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Weekdays"
+                android:inputType="text" />
+        </TableRow>
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/btnReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            fancy:fb_defaultColor="@color/colorPrimary"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_fontIconResource="&#xf234;"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_radius="30dp"
+            android:text="Add Class"
+            android:onClick="addClass"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_fontIconResource="&#xf0e2;"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_radius="30dp"
+                android:onClick="ClickOnSubmit"
+                android:text="Reset" />
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnCancel"
+                android:layout_width="130dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_fontIconResource="&#xf04a;"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_radius="30dp"
+                android:onClick="clickToCancel"
+                android:text="Back" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
