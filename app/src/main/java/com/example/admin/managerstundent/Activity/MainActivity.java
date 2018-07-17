@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < 4; i++) {
                 DateTime dt2 = dt.plusSeconds(4800);
                 //classes.add(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "   Mon-Wed-Fri"));
-                db.addClass(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "   Mon-Wed-Fri"));
+                db.addClass(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "Mon-Wed-Fri"));
                 dt = dt2.plusSeconds(900);
             }
         }

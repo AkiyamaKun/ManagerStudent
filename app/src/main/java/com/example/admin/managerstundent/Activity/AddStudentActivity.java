@@ -1,5 +1,6 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -10,19 +11,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.admin.managerstundent.Adapter.DBAdapter;
+import com.example.admin.managerstundent.DTO.ClassDTO;
 import com.example.admin.managerstundent.Entity.Student;
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.DocumentHelper;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -84,6 +100,18 @@ public class AddStudentActivity extends AppCompatActivity {
 
         //init realm
         realm = Realm.getDefaultInstance();
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        List<String> dataSrc = new ArrayList<>();
+        DBAdapter adapter = new DBAdapter(this);
+        adapter.open();
+        List<ClassDTO> dtos = adapter.findAllClass();
+        for (ClassDTO dto: dtos) {
+            dataSrc.add(dto.getClassName());
+        }
+        adapter.close();
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dataSrc);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
 
     /**
@@ -212,4 +240,16 @@ public class AddStudentActivity extends AppCompatActivity {
         }
     }
 
+    public void changeDate(View view) {
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        DatePickerDialog dpd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                DateTime dt = new DateTime(year, month, dayOfMonth, 0, 0, 0);
+                ((EditText) findViewById(R.id.edit_test_birthday)).setText(dtf.print(dt));
+            }
+        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+        dpd.show();
+    }
 }

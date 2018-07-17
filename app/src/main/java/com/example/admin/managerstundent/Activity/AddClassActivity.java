@@ -100,4 +100,10 @@ public class AddClassActivity extends AppCompatActivity {
         }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
         dialog.show();
     }
+
+    public void clickToCancel(View view) {
+        Intent intent = new Intent(this, ManageStudentActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -85,7 +85,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         className = getIntent().getStringExtra("subject");
 
         if (className != null) {
-            ((TextView) findViewById(R.id.txt)).setText("Class: " + className);
+            ((TextView) findViewById(R.id.txt)).setText("Class: " + className.substring(0, className.indexOf(" ")));
             ((TextView) findViewById(R.id.time)).setText("Time: " + getIntent().getStringExtra("time"));
             txt.setText(txt.getText()+ className);
         }
@@ -123,9 +123,9 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             bar.setSelectedItemId(R.id.nav_studentmanagent);
             for (int i = 0; i < 15; i++) {
                 String classstudy = subject[(i + 2) % 4];
-                if(i%5==1) {
-                    classstudy +=", " +  subject[(i + 3) % 4];
-                }
+//                if(i%5==1) {
+//                    classstudy +=", " +  subject[(i + 3) % 4];
+//                }
                 dtos.add(new StudentDTO(i, "https://picsum.photos/60/60/?image=" + (i * 50 + 2), lastName[i % 3] + " " + middleName[i % 4] + " " + firstName[i % 5],
                         new Random().nextInt(3) + 15, classstudy, (i % 4 == 0) ? false : true));
             }
