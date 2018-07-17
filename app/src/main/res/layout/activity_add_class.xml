@@ -150,6 +150,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Weekdays"
+                android:focusable="false"
+                android:onClick="changeWeekdays"
                 android:inputType="text" />
         </TableRow>
 

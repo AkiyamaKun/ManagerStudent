@@ -101,6 +101,7 @@
                     android:paddingTop="10dp"
                     android:text="Edit Class"
                     fancy:fb_borderColor="#FFFFFF"
+                    android:onClick="editClass"
                     fancy:fb_borderWidth="1dp"
                     fancy:fb_defaultColor="@color/colorPrimary"
                     fancy:fb_fontIconResource="&#xf044;"

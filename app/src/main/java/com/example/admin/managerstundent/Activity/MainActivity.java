@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_todolist:
-                        Intent intent4 = new Intent(MainActivity.this, ManageStudentActivity.class);
+                        Intent intent4 = new Intent(MainActivity.this, ListClassActivity.class);
                         startActivity(intent4);
                         finish();
                         break;
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void addStudent(View view) {
-        Intent intent = new Intent(this, ManageStudentActivity.class);
+        Intent intent = new Intent(this, ListClassActivity.class);
         startActivity(intent);
     }
 
@@ -212,5 +212,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
         dpd.show();
+    }
+
+    public void addClass(View view) {
+        Intent intent = new Intent(this, AddClassActivity.class);
+        startActivity(intent);
     }
 }

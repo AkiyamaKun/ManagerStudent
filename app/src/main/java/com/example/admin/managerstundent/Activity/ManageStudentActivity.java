@@ -85,7 +85,7 @@ public class ManageStudentActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_todolist:
-                        Intent intent4 = new Intent(ManageStudentActivity.this, ManageStudentActivity.class);
+                        Intent intent4 = new Intent(ManageStudentActivity.this, ListClassActivity.class);
                         startActivity(intent4);
                         finish();
                         break;

@@ -163,7 +163,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                         finish();
                         break;
                     case R.id.nav_todolist:
-                        Intent intent4 = new Intent(ListStudentActivity.this, ManageStudentActivity.class);
+                        Intent intent4 = new Intent(ListStudentActivity.this, ListClassActivity.class);
                         startActivity(intent4);
                         finish();
                         break;
@@ -298,5 +298,11 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                     new Random().nextInt(3) + 15, classstudy, (i % 4 == 0) ? false : true));
         }
         adapter.notifyDataSetChanged();
+    }
+
+
+    public void editClass(View view) {
+        EditClassFragment fragment = new EditClassFragment();
+        fragment.show(getSupportFragmentManager(),"edit");
     }
 }
