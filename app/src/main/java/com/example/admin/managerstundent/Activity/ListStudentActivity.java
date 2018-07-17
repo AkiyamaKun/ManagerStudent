@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -29,6 +30,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.admin.managerstundent.Adapter.StudentAdapter;
+import com.example.admin.managerstundent.Adapter.StudentChooserAdapter;
 import com.example.admin.managerstundent.DTO.StudentDTO;
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
@@ -37,7 +39,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ListStudentActivity extends AppCompatActivity implements Filter.FilterListener {
+import mehdi.sakout.fancybuttons.FancyButton;
+
+public class ListStudentActivity extends AppCompatActivity implements Filter.FilterListener, StudentChooseFragment.OnCompleteListener {
     SwipeMenuListView listView;
     StudentAdapter adapter;
     SearchView searchView;
@@ -47,6 +51,9 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
     String middleName[] = {"Thi", "Van", "Quoc", "Ngoc"};
     String firstName[] = {"Phuong", "Anh", "Luong", "Nam", "Triet"};
     String subject[] = {"Math 9", "Math 10", "Chemistry 10", "Physics 11"};
+    private boolean up = false;
+    String className = null;
+    FancyButton fb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +62,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.seek_bar);
         TextView txt = findViewById(R.id.subject);
-
+        fb= findViewById(R.id.btnShow);
         FloatingSearchView fsearchView = findViewById(R.id.floating_search_view);
         fsearchView.setDimBackground(false);
         fsearchView.clearSearchFocus();
@@ -64,13 +71,18 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             public void onActionMenuItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.name:
-                        Intent intent = new Intent(ListStudentActivity.this, AddStudentActivity.class);
-                        startActivity(intent);
+                        if(className == null) {
+                            Intent intent = new Intent(ListStudentActivity.this, AddStudentActivity.class);
+                            startActivity(intent);
+                        } else {
+                            StudentChooseFragment fragment = new StudentChooseFragment();
+                            fragment.show(getSupportFragmentManager(), "Choose student!");
+                        }
                         break;
                 }
             }
         });
-        String className = getIntent().getStringExtra("subject");
+        className = getIntent().getStringExtra("subject");
 
         if (className != null) {
             ((TextView) findViewById(R.id.txt)).setText("Class: " + className);
@@ -103,18 +115,22 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         });
         searchView.clearFocus();
         alertBuilder = new AlertDialog.Builder(this);
-
+        findViewById(R.id.txtHold).setVisibility(View.GONE);
         BottomNavigationView bar = findViewById(R.id.bottom_navigation);
         dtos = new ArrayList<>();
         if (className == null) {
-            findViewById(R.id.txtHold).setVisibility(View.GONE);
+            findViewById(R.id.btnShow).setVisibility(View.GONE);
             bar.setSelectedItemId(R.id.nav_studentmanagent);
             for (int i = 0; i < 15; i++) {
+                String classstudy = subject[(i + 2) % 4];
+                if(i%5==1) {
+                    classstudy +=", " +  subject[(i + 3) % 4];
+                }
                 dtos.add(new StudentDTO(i, "https://picsum.photos/60/60/?image=" + (i * 50 + 2), lastName[i % 3] + " " + middleName[i % 4] + " " + firstName[i % 5],
-                        new Random().nextInt(3) + 15, subject[(i + 2) % 4], (i % 4 == 0) ? false : true));
+                        new Random().nextInt(3) + 15, classstudy, (i % 4 == 0) ? false : true));
             }
         } else {
-            findViewById(R.id.txtHold).setVisibility(View.VISIBLE);
+            findViewById(R.id.btnShow).setVisibility(View.VISIBLE);
             bar.setVisibility(View.GONE);
             for (int i = 0; i < 5; i++) {
                 dtos.add(new StudentDTO(i, "https://picsum.photos/60/60/?image=" + (i * 50 + 2), lastName[i % 3] + " " + middleName[i % 4] + " " + firstName[i % 5],
@@ -224,12 +240,23 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             }
         });
 
-
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStatus(v);
+            }
+        });
+        fb.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                changeStatus(v);
+                return false;
+            }
+        });
     }
 
     public void addStudent(View view) {
-        Intent intent = new Intent(this, AddStudentActivity.class);
-        startActivity(intent);
+
     }
 
     @Override
@@ -246,5 +273,30 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void changeStatus(View view) {
+        if(up) {
+            up = false;
+            findViewById(R.id.txtHold).setVisibility(View.GONE);
+            fb.setIconResource("\uf078");
+        } else {
+            up = true;
+            findViewById(R.id.txtHold).setVisibility(View.VISIBLE);
+            fb.setIconResource("\uf077");
+        }
+    }
+
+    @Override
+    public void onComplete(Integer numOfStu) {
+        for (int i = 0; i < numOfStu; i++) {
+            String classstudy = subject[(i + 2) % 4];
+            if(i%5==1) {
+                classstudy +=", " +  subject[(i + 3) % 4];
+            }
+            dtos.add(new StudentDTO(i, "https://picsum.photos/60/60/?image=" + (i * 50 + 2), lastName[i % 3] + " " + middleName[i % 4] + " " + firstName[i % 5],
+                    new Random().nextInt(3) + 15, classstudy, (i % 4 == 0) ? false : true));
+        }
+        adapter.notifyDataSetChanged();
     }
 }
