@@ -20,7 +20,7 @@ import java.util.Calendar;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class EditClassFragment extends DialogFragment implements CommonAction {
-    private EditText name, subject, time, time1, days;
+    private EditText name, subject, time, time1, days,slots;
     private FancyButton fbEdit,fbCancel;
     private TextView ampm;
     @Nullable
@@ -40,6 +40,8 @@ public class EditClassFragment extends DialogFragment implements CommonAction {
         time1.setText("3:00");
         days = rootView.findViewById(R.id.edit_days);
         days.setText("Mon-Wed-Fri");
+        slots = rootView.findViewById(R.id.edit_slots);
+        slots.setText("30");
         ampm = rootView.findViewById(R.id.ampm);
         fbEdit = rootView.findViewById(R.id.btnReset);
         fbEdit.setText("Edit");
@@ -63,6 +65,7 @@ public class EditClassFragment extends DialogFragment implements CommonAction {
                 changeDate(v);
             }
         });
+
         fbEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,6 +13,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
     private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
     private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;
+    private static final Integer[] colors = {3, 4, 5, 6};
+
+    private Uri calUri;
 
     /**
      * Override On Create
@@ -95,72 +99,51 @@ public class MainActivity extends AppCompatActivity {
         List<ClassDTO> classes = new ArrayList<>();
         DateTimeFormatter dtf = DateTimeFormat.forPattern("hh:mm");
         DateTime dt = dtf.parseDateTime("5:00");
+
+        long calID = getCelendarId();
+        Uri updateUri = ContentUris.withAppendedId(CalendarContract.Calendars.CONTENT_URI, calID);
+        calUri = updateUri;
         DBAdapter db = new DBAdapter(this);
         db.open();
+        DateTimeFormatter format = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm");
+        DateTime end2 = format.parseDateTime("20/07/2018 05:00");
+
         classes = db.findAllClass();
         if (classes.isEmpty()) {
-
-                for (int i = 0; i < 4; i++) {
-                    DateTime dt2 = dt.plusSeconds(4800);
-                    //classes.add(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "   Mon-Wed-Fri"));
-                    db.addClass(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "Mon-Wed-Fri"));
-                    dt = dt2.plusSeconds(900);
+            deleteEvents();
+            for (int i = 0; i < 4; i++) {
+                DateTime dt2 = dt.plusSeconds(4800);
+                //classes.add(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "   Mon-Wed-Fri"));
+                db.addClass(new ClassDTO(subject[i % 4], subject[i % 4], dtf.print(dt) + " - " + dtf.print(dt2) + " AM", "Mon-Wed-Fri"));
+                dt = dt2.plusSeconds(900);
             }
-            for (int j = 0; j < 10; j++) {
-                    Integer day = 19;
-                DateTime begindate =DateTime.now().withTimeAtStartOfDay().plus(3600*5);
-                Integer hourS = 6;
+            DateTime begindate = DateTime.now().withTimeAtStartOfDay().plusSeconds(3600 * 6);
+            for (int j = 0; j < 15; j++) {
+                DateTime start = begindate;
                 for (int i = 0; i < 4; i++) {
-                    Integer hourE = hourS+1;
-                        DateTime start = begindate;
-                        DateTime end = begindate.plus(4800);
-                        Calendar beginTime = Calendar.getInstance();
-                        //beginTime.setTimeInMillis(start.getMillis());
-                        beginTime.set(2018,7,day++,hourS,0);
-                        long startMillis = beginTime.getTimeInMillis();
-                        Calendar endTime = Calendar.getInstance();
-                    endTime.set(2018,7,day++,hourE,0);
-                        //endTime.setTimeInMillis(end.getMillis());
-                        long endMillis = endTime.getTimeInMillis();
+                    DateTime end = start.plusSeconds(4800);
+                    //beginTime.set(2018,7,day++,hourS,0);
+                    //endTime.set(2018,7,day++,hourE,0);
+                    Log.d("Time", "Start time: " + format.print(start) + " end time: " + format.print(end));
                     ContentResolver cr = getContentResolver();
-                        ContentValues values = new ContentValues();
-                        values.put(CalendarContract.Events.DTSTART, startMillis);
-                        values.put(CalendarContract.Events.DTEND, endMillis);
-                        values.put(CalendarContract.Events.TITLE, subject[i % 4]);
-                        values.put(CalendarContract.Events.DESCRIPTION, subject[i % 4]);
-                        values.put(CalendarContract.Events.CALENDAR_ID, getCelendarId());
-                        values.put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Ho_Chi_Minh");
-                        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-                        start = end.plus(900);
-                        hourS+=2;
+                    ContentValues values = new ContentValues();
+                    values.put(CalendarContract.Events.DTSTART, start.getMillis());
+                    values.put(CalendarContract.Events.DTEND, end.getMillis());
+                    values.put(CalendarContract.Events.TITLE, subject[i % 4]);
+                    values.put(CalendarContract.Events.DESCRIPTION, subject[i % 4]);
+                    values.put(CalendarContract.Events.CALENDAR_ID, colors[i % 4]);
+                    values.put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Ho_Chi_Minh");
+                    @SuppressLint("MissingPermission") Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+                    start = end.plusSeconds(900);
                 }
-                begindate = begindate.plus(3600*24);
+                begindate = begindate.plusSeconds(3600 * 24*2);
             }
         }
         classes = db.findAllClass();
         db.close();
-        ContentResolver cr = getContentResolver();
-        ContentValues values = new ContentValues();
-        values.put(CalendarContract.Events.DTSTART, DateTime.now().getMillis());
-        values.put(CalendarContract.Events.DTEND, DateTime.now().plus(4800).getMillis());
-        values.put(CalendarContract.Events.TITLE, subject[1]);
-        values.put(CalendarContract.Events.DESCRIPTION, subject[1]);
-        values.put(CalendarContract.Events.CALENDAR_ID, getCelendarId());
-        values.put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Ho_Chi_Minh");
-        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-        long eventID = Long.parseLong(uri.getLastPathSegment());
-        System.out.println("**************************"+uri.getPath()+"eventID"+eventID);
         ListClassAdapter adapter = new ListClassAdapter(classes, this);
         listView.setAdapter(adapter);
         updateCelendar();
-        for (PackageInfo pack : getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS)) {
-            ProviderInfo[] providers = pack.providers;
-            if (providers != null) {
-                for (ProviderInfo provider : providers) {
-                    Log.d("WTFBRO", "********************provider: " + provider.authority);
-                }
-            }
-        }
 
         bar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -172,23 +155,12 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_timetable:
-                        Intent intent2 = new Intent(MainActivity.this, TableActivity.class);
-                        long calID = getCelendarId();
-                        Log.d("ID", "***********************"+calID);
-                        ContentValues values = new ContentValues();
-// The new display name for the calendar
-                        values.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, "Minustiktok's Calendar");
-                        values.put(CalendarContract.Calendars.CALENDAR_COLOR, getResources().getColor(R.color.colorPrimary));
-                        Uri updateUri = ContentUris.withAppendedId(CalendarContract.Calendars.CONTENT_URI, calID);
-                        int rows = getContentResolver().update(updateUri, values, null, null);
-
                         long startMillis = System.currentTimeMillis();
                         Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
                         builder.appendPath("time");
                         ContentUris.appendId(builder, startMillis);
                         intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
                         startActivity(intent);
-                        //startActivity(intent2);
                         break;
                     case R.id.nav_studentmanagent:
                         Intent intent3 = new Intent(MainActivity.this, ListStudentActivity.class);
@@ -260,28 +232,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toClass(View view) {
-//        Intent intent = new Intent(this, ListStudentActivity.class);
-//        switch(view.getId()) {
-//            case R.id.card1:
-//                intent.putExtra("subject", "Math 9");
-//                intent.putExtra("time", "5:00 - 6:30 AM");
-//                startActivity(intent);
-//                break;
-//            case R.id.card2:
-//                intent.putExtra("subject", "Math 10");
-//                intent.putExtra("time", "6:45 - 8:15 AM");
-//                startActivity(intent);
-//                break;
-//            case R.id.card3:
-//                intent.putExtra("subject", "Chemistry 10");
-//                intent.putExtra("time", "8:30 - 10:00 AM");
-//                startActivity(intent);
-//                break;
-//            case R.id.card4:
-//                intent.putExtra("subject", "Physics 11");
-//                intent.putExtra("time", "10:15 - 11:45 AM");
-//                startActivity(intent);
-//                break;
 //        }
     }
 
@@ -303,27 +253,43 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @SuppressLint("MissingPermission")
+    public void deleteEvents() {
+        ContentResolver cr = getContentResolver();
+        Cursor cursor = cr
+                .query(CalendarContract.Events.CONTENT_URI,
+                        new String[]{CalendarContract.Events._ID, CalendarContract.Events.CUSTOM_APP_PACKAGE},
+                        null, null, null);
+        cursor.moveToFirst();
 
-    public void updateCelendar() {
-        ContentValues values = new ContentValues();
-// The new display name for the calendar
-        values.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, "MinusTiktok's Calendar");
-        Uri updateUri = ContentUris.withAppendedId(CalendarContract.Calendars.CONTENT_URI, getCelendarId());
-        int rows = getContentResolver().update(updateUri, values, null, null);
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2011, 9, 23, 8, 0);
-        beginTime.getFirstDayOfWeek();
+        String idsToDelete = "";
+        for (int i = 0; i < cursor.getCount(); i++) {
+            // it might be also smart to check CALENDAR_ID here
+            idsToDelete += String.format("_ID = %s OR ", cursor.getString(0));
+
+            cursor.moveToNext();
+        }
+
+        if (idsToDelete.endsWith(" OR ")) {
+            idsToDelete = idsToDelete.substring(0, idsToDelete.length() - 4);
+        }
+
+        cr.delete(CalendarContract.Events.CONTENT_URI, idsToDelete, null);
 
     }
+
+    public void updateCelendar() {
+    }
+
     public long getCelendarId() {
         ContentResolver cr = getContentResolver();
         Uri uri = CalendarContract.Calendars.CONTENT_URI;
         String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND ("
                 + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
                 + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";
-        String[] selectionArgs = new String[]{"local", "local", "LOCAL"};
+        String[] selectionArgs = new String[]{"minustiktok@gmail.com", "com.google", "minustiktok@gmail.com"};
         @SuppressLint("MissingPermission")
-        Cursor cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
+        Cursor cur = cr.query(uri, EVENT_PROJECTION, null, null, null);
 
         long calID = 0;
         while (cur.moveToNext()) {
@@ -335,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
             ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
             calID = cur.getLong(PROJECTION_ID_INDEX);
 
-            Log.d("Account ", "***************************account: "+ displayName + " "+accountName + " " + ownerName + " " + calID+ " "+cur.getString(cur.getColumnIndex(CalendarContract.Calendars.ACCOUNT_TYPE)));
+            Log.d("Account ", "***************************account: " + displayName + " " + accountName + " " + ownerName + " " + calID + " " + cur.getString(cur.getColumnIndex(CalendarContract.Calendars.ACCOUNT_TYPE)));
             // Get the field values
         }
         return calID;

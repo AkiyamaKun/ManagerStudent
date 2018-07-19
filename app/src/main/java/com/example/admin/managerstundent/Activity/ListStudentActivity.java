@@ -1,11 +1,14 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -85,7 +88,9 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         className = getIntent().getStringExtra("subject");
 
         if (className != null) {
-            ((TextView) findViewById(R.id.txt)).setText("Class: " + className.substring(0, className.indexOf(" ")));
+            if(className.indexOf(" ") != -1) {
+                ((TextView) findViewById(R.id.txt)).setText("Class: " + className.substring(0, className.indexOf(" ")));
+            }
             ((TextView) findViewById(R.id.time)).setText("Time: " + getIntent().getStringExtra("time"));
             txt.setText(txt.getText()+ className);
         }
@@ -95,18 +100,6 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                 ((Filterable) adapter).getFilter().filter(newQuery, ListStudentActivity.this);
             }
         });
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                ((Filterable) adapter).getFilter().filter(searchView.getQuery(), ListStudentActivity.this);
-//                return false;
-//            }
-//        });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
@@ -153,9 +146,12 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                         finish();
                         break;
                     case R.id.nav_timetable:
-                        Intent intent2 = new Intent(ListStudentActivity.this, TableActivity.class);
-                        startActivity(intent2);
-                        finish();
+                        long startMillis = System.currentTimeMillis();
+                        Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+                        builder.appendPath("time");
+                        ContentUris.appendId(builder, startMillis);
+                        intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
+                        startActivity(intent);
                         break;
                     case R.id.nav_studentmanagent:
                         Intent intent3 = new Intent(ListStudentActivity.this, ListStudentActivity.class);
@@ -178,11 +174,6 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
 
             @Override
             public void create(SwipeMenu menu) {
-//                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
-//                openItem.setBackground(new ColorDrawable(Color.WHITE));
-//                openItem.setIcon(R.drawable.ic_edit);
-//                openItem.setWidth(90);
-//                menu.addMenuItem(openItem);
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 deleteItem.setBackground(new ColorDrawable(Color.WHITE));
                 deleteItem.setIcon(R.drawable.ic_delete);
@@ -199,12 +190,6 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 final int positiondelete = position;
                 switch (index) {
-//                    case 0:
-//                        Intent intent = new Intent(ListStudentActivity.this, EditStudentActivity.class);
-//                        intent.putExtra("id", dtos.get(position).getId().toString());
-//                        intent.putExtra("name", dtos.get(position).getName().toString());
-//                        startActivity(intent);
-//                        break;
                     case 0:
                         alertBuilder.setTitle("Delete Student")
                                 .setIcon(R.drawable.ic_delete)
@@ -244,13 +229,6 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
             @Override
             public void onClick(View v) {
                 changeStatus(v);
-            }
-        });
-        fb.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                changeStatus(v);
-                return false;
             }
         });
     }

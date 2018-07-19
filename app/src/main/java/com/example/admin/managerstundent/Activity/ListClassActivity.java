@@ -1,9 +1,12 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -53,9 +56,12 @@ public class ListClassActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_timetable:
-                        Intent intent2 = new Intent(ListClassActivity.this, TableActivity.class);
-                        startActivity(intent2);
-                        finish();
+                        long startMillis = System.currentTimeMillis();
+                        Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+                        builder.appendPath("time");
+                        ContentUris.appendId(builder, startMillis);
+                        intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
+                        startActivity(intent);
                         break;
                     case R.id.nav_studentmanagent:
                         Intent intent3 = new Intent(ListClassActivity.this, ListStudentActivity.class);

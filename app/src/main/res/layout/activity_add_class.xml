@@ -155,6 +155,27 @@
                 android:inputType="text" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/ic_slots"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_slots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Number of slots"
+                android:inputType="number" />
+        </TableRow>
+
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/btnReset"
             android:layout_width="match_parent"

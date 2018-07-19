@@ -58,35 +58,55 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="0dp">
+            <LinearLayout
+                android:id="@+id/slotDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/totalSlots"
+                    android:text="Slots:     +Total: 30 "
+                    android:layout_width="wrap_content"
+                    android:textSize="15dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/remainSlots"
+                    android:text="        +Remain: 15"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:textSize="15dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/time"
+                android:text="Time: "
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subject"
+                android:text="Subject: "
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:id="@+id/classDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/time"
-                    android:text="Time: "
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:textSize="20dp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/subject"
-                    android:text="Subject: "
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:textSize="20dp"
-                    android:layout_height="wrap_content" />
+
+
             </LinearLayout>
             <TextView
                 android:id="@+id/weekdays"
                 android:gravity="left"
                 android:text="Weekdays: Mon - Wed - Fri"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -117,9 +137,9 @@
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/listView"
         android:layout_below="@+id/txtAll"
-        android:layout_marginBottom="60dp"
+        android:layout_above="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:dividerHeight="1sp"
         android:minHeight="40dp"/>
 
