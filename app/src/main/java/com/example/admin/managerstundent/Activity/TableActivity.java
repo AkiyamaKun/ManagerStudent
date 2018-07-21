@@ -1,16 +1,27 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
+import android.graphics.RectF;
+import android.net.Uri;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alamkanak.weekview.MonthLoader;
+import com.alamkanak.weekview.WeekView;
+import com.alamkanak.weekview.WeekViewEvent;
+import com.alamkanak.weekview.WeekViewLoader;
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
 import com.github.eunsiljo.timetablelib.data.TimeData;
@@ -27,14 +38,19 @@ import org.joda.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
-public class TableActivity extends AppCompatActivity {
+public class TableActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener{
 
     private TimeTableView timeTable;
+    private WeekView mWeekView;
 
     private List<String> mTitles = Arrays.asList("Japanese", "English", "Math", "Physics", "Chemistry", "Biology");
     private List<String> mHeaders = Arrays.asList("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+    private String subject[] = {"Math 9", "Math 10", "Chemistry 10", "Physics 11"};
+    private Integer colors[] ={R.color.color_table_1_light,R.color.color_table_2_light,R.color.color_table_3_light,R.color.color_table_4_light};
+    final SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +59,21 @@ public class TableActivity extends AppCompatActivity {
         editor.apply();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+        // Get a reference for the week view in the layout.
+        mWeekView = (WeekView) findViewById(R.id.weekView);
+        mWeekView.setShowNowLine(true);
+        mWeekView.setEventTextSize(20);
+
+        mWeekView.notifyDatasetChanged();
+// Set an action when any event is clicked.
+        mWeekView.setOnEventClickListener(this);
+
+// The week view has infinite scrolling horizontally. We have to provide the events of a
+// month every time the month changes on the week view.
+        mWeekView.setMonthChangeListener(this);
+
+// Set long press listener for events.
+        mWeekView.setEventLongPressListener(this);
         timeTable = (TimeTableView)findViewById(R.id.timetabledummy);
         timeTable.setStartHour(6);
         initData();
@@ -126,6 +157,32 @@ public class TableActivity extends AppCompatActivity {
         return tables;
     }
 
+    private List<WeekViewEvent> getEvents() {
+        List<WeekViewEvent> events = new ArrayList<>();
+        //Calendar start = Calendar.getInstance();
+        //Calendar end = Calendar.getInstance();
+        //start.set(2018,7,24,5,30);
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm");
+        DateTime begindate = DateTime.now().withTimeAtStartOfDay().plusSeconds(3600 * 6);
+        for (int j = 0; j < 15; j++) {
+            DateTime start = begindate;
+            for (int i = 0; i < 4; i++) {
+                Calendar startTime = Calendar.getInstance();
+                Calendar endTime = Calendar.getInstance();
+                DateTime end = start.plusSeconds(4800);
+                startTime.setTimeInMillis(start.getMillis());
+                endTime.setTimeInMillis(end.getMillis());
+                Log.d("date","start: " + dtf.print(startTime.getTimeInMillis())+ " End: "+dtf.print(endTime.getTimeInMillis()));
+                WeekViewEvent event = new WeekViewEvent(5*i+1,subject[i % 4], startTime,endTime);
+                event.setLocation("\n"+subject[i % 4]);
+                event.setColor(getResources().getColor(colors[i%4]));
+                events.add(event);
+                start = end.plusSeconds(900);
+            }
+            begindate = begindate.plusSeconds(3600 * 24 * 2);
+        }
+        return events;
+    }
 
 
     private ArrayList<TimeTableData> initDetailData(){
@@ -158,5 +215,36 @@ public class TableActivity extends AppCompatActivity {
         return date.getMillis();
     }
 
+    @Override
+    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+        List<WeekViewEvent> events = getEvents();
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
+        startTime.set(2018,7,22,3,30);
+        endTime.set(2018,7,22,9,30);
+        WeekViewEvent event = new WeekViewEvent(999,subject[0], startTime,endTime);
+        events.add(event);
+        Calendar calendar = Calendar.getInstance();
+        if (newMonth == calendar.get(Calendar.MONTH) || newMonth == calendar.get(Calendar.MONTH) + 1 )
+            return events;
+        else {
+            return new ArrayList<WeekViewEvent>();
+        }
+    }
+
+    @Override
+    public void onEventClick(WeekViewEvent event, RectF eventRect) {
+        Intent intent = new Intent(this, ListStudentActivity.class);
+        intent.putExtra("subject", event.getName());
+        intent.putExtra("time", sdf.format(new DateTime(event.getStartTime().getTimeInMillis()).toDate()) +
+                " - " + sdf.format(new DateTime(event.getEndTime().getTimeInMillis()).toDate()));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
+        TastyToast.makeText(TableActivity.this, event.getName() + ", " + sdf.format(new DateTime(event.getStartTime().getTimeInMillis()).toDate()) +
+                " - " + sdf.format(new DateTime(event.getEndTime().getTimeInMillis()).toDate()), TastyToast.LENGTH_SHORT, TastyToast.DEFAULT);
+    }
 }
 

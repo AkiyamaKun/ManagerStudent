@@ -1,35 +1,23 @@
 package com.example.admin.managerstundent.Activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ProviderInfo;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,17 +26,13 @@ import com.example.admin.managerstundent.Adapter.ListClassAdapter;
 import com.example.admin.managerstundent.DTO.ClassDTO;
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.BottomNavigationViewHelper;
-import com.skyfishjy.library.RippleBackground;
-import com.squareup.picasso.Picasso;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
@@ -136,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressLint("MissingPermission") Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
                     start = end.plusSeconds(900);
                 }
-                begindate = begindate.plusSeconds(3600 * 24*2);
+                begindate = begindate.plusSeconds(3600 * 24 * 2);
             }
         }
         classes = db.findAllClass();
@@ -150,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_dashboard:
-                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        Intent intent = new Intent(MainActivity.this, TableActivity.class);
                         startActivity(intent);
                         finish();
                         break;

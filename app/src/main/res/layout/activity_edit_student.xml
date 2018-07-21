@@ -131,8 +131,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:text="10B"
+            android:text="Math 9"
+            android:focusable="false"
+            android:onClick="chooseClass"
             android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </TableRow>
 
     <TableRow

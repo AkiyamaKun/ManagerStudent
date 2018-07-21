@@ -44,7 +44,7 @@ import java.util.Random;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class ListStudentActivity extends AppCompatActivity implements Filter.FilterListener, StudentChooseFragment.OnCompleteListener {
+public class ListStudentActivity extends AppCompatActivity implements Filter.FilterListener {
     SwipeMenuListView listView;
     StudentAdapter adapter;
     SearchView searchView;
@@ -146,12 +146,9 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
                         finish();
                         break;
                     case R.id.nav_timetable:
-                        long startMillis = System.currentTimeMillis();
-                        Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
-                        builder.appendPath("time");
-                        ContentUris.appendId(builder, startMillis);
-                        intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
-                        startActivity(intent);
+                        Intent intent2 = new Intent(ListStudentActivity.this, TableActivity.class);
+                        startActivity(intent2);
+                        finish();
                         break;
                     case R.id.nav_studentmanagent:
                         Intent intent3 = new Intent(ListStudentActivity.this, ListStudentActivity.class);
@@ -265,7 +262,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
         }
     }
 
-    @Override
+    //@Override
     public void onComplete(Integer numOfStu) {
         for (int i = 0; i < numOfStu; i++) {
             String classstudy = subject[(i + 2) % 4];

@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.admin.managerstundent.Adapter.DBAdapter;
+import com.example.admin.managerstundent.ChooseClassInterface;
 import com.example.admin.managerstundent.DTO.ClassDTO;
 import com.example.admin.managerstundent.Entity.Student;
 import com.example.admin.managerstundent.R;
@@ -49,7 +50,7 @@ import io.realm.Realm;
  *
  * Add Student Activity Class
  */
-public class AddStudentActivity extends AppCompatActivity {
+public class AddStudentActivity extends AppCompatActivity implements ChooseClassInterface {
     private static final String TAG = AddStudentActivity.class.toString();
     //Realm use for database
     private Realm realm;
@@ -70,15 +71,6 @@ public class AddStudentActivity extends AppCompatActivity {
 
     @BindView(R.id.edit_test_grade)
     EditText grade;
-
-    @BindView(R.id.chb_math)
-    CheckBox math;
-
-    @BindView(R.id.chb_physical)
-    CheckBox physical;
-
-    @BindView(R.id.chb_chemistry)
-    CheckBox chemistry;
 
     @BindView(R.id.edit_test_name_parent)
     EditText nameParent;
@@ -123,9 +115,6 @@ public class AddStudentActivity extends AppCompatActivity {
         name.setText(null);
         birthday.setText(null);
         grade.setText(null);
-        math.setChecked(false);
-        physical.setChecked(false);
-        chemistry.setChecked(false);
         nameParent.setText(null);
         phone.setText(null);
     }
@@ -251,5 +240,17 @@ public class AddStudentActivity extends AppCompatActivity {
             }
         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
         dpd.show();
+    }
+
+    @Override
+    public void changeClass(String classes) {
+        if(classes.length()>3) {
+            grade.setText(classes.substring(1,classes.length()));
+        }
+    }
+
+    public void chooseClass(View view) {
+        ClassChooserFragment fragment = new ClassChooserFragment();
+        fragment.show(getSupportFragmentManager(),"choose classes");
     }
 }

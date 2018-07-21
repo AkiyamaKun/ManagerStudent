@@ -68,9 +68,7 @@ dependencies {
     // Sweet Alert
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
 
-    implementation "com.cleveroad:adaptivetablelayout:1.1.1"
-
-    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+    implementation 'com.github.alamkanak:android-week-view:1.2.6'
 
 
 }

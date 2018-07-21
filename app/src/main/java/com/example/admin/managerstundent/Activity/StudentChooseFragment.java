@@ -77,10 +77,4 @@ public class StudentChooseFragment extends DialogFragment {
         return rootView;
     }
 
-    public static interface OnCompleteListener {
-        public abstract void onComplete(Integer numOfStu);
-    }
-
-    private OnCompleteListener mListener;
-
 }

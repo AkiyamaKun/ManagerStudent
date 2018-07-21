@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    tools:context=".Activity.WeekdaysChooserFragment"
+    tools:context=".Activity.ClassChooserFragment"
     android:orientation="vertical"
     android:padding="10dp">
-
     <ListView
         android:id="@+id/listChoose"
         android:layout_width="match_parent"
@@ -47,5 +46,4 @@
             fancy:fb_fontIconResource="&#xf00d;"
             fancy:fb_radius="30dp" />
     </LinearLayout>
-
 </LinearLayout>

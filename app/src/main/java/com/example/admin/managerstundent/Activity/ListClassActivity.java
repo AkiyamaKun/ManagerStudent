@@ -56,12 +56,9 @@ public class ListClassActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_timetable:
-                        long startMillis = System.currentTimeMillis();
-                        Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
-                        builder.appendPath("time");
-                        ContentUris.appendId(builder, startMillis);
-                        intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
-                        startActivity(intent);
+                        Intent intent2 = new Intent(ListClassActivity.this, TableActivity.class);
+                        startActivity(intent2);
+                        finish();
                         break;
                     case R.id.nav_studentmanagent:
                         Intent intent3 = new Intent(ListClassActivity.this, ListStudentActivity.class);

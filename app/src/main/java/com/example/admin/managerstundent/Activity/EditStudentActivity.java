@@ -10,11 +10,15 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.admin.managerstundent.Adapter.DBAdapter;
+import com.example.admin.managerstundent.DTO.ClassDTO;
 import com.example.admin.managerstundent.R;
 import com.example.admin.managerstundent.Ultils.CircleTransform;
 import com.example.admin.managerstundent.Ultils.DocumentHelper;
@@ -26,7 +30,9 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 public class EditStudentActivity extends AppCompatActivity {
@@ -50,6 +56,18 @@ public class EditStudentActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.edit_test_birthday)).setText(getIntent().getStringExtra("birthday"));
         ((TextView) findViewById(R.id.edit_test_name_parent)).setText(getIntent().getStringExtra("gender"));
         ((TextView) findViewById(R.id.edit_test_grade)).setText(getIntent().getStringExtra("class"));
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        List<String> dataSrc = new ArrayList<>();
+        DBAdapter adapter = new DBAdapter(this);
+        adapter.open();
+        List<ClassDTO> dtos = adapter.findAllClass();
+        for (ClassDTO dto: dtos) {
+            dataSrc.add(dto.getClassName());
+        }
+        adapter.close();
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dataSrc);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
 
     public void clickToCancel(View view) {
@@ -136,5 +154,10 @@ public class EditStudentActivity extends AppCompatActivity {
             }
         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
         dpd.show();
+    }
+
+    public void chooseClass(View view) {
+        ClassChooserFragment fragment = new ClassChooserFragment();
+        fragment.show(getSupportFragmentManager(),"choose classes");
     }
 }

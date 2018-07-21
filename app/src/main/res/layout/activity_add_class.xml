@@ -116,11 +116,6 @@
                 android:onClick="changeDate"
                 android:hint="Time End"
                 android:inputType="none" />
-            <TextView
-                android:id="@+id/ampm"
-                android:text="AM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
         </TableRow>
 
 

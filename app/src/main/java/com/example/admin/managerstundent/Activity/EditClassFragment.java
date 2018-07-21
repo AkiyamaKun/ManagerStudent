@@ -22,7 +22,6 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class EditClassFragment extends DialogFragment implements CommonAction {
     private EditText name, subject, time, time1, days,slots;
     private FancyButton fbEdit,fbCancel;
-    private TextView ampm;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class EditClassFragment extends DialogFragment implements CommonAction {
         days.setText("Mon-Wed-Fri");
         slots = rootView.findViewById(R.id.edit_slots);
         slots.setText("30");
-        ampm = rootView.findViewById(R.id.ampm);
         fbEdit = rootView.findViewById(R.id.btnReset);
         fbEdit.setText("Edit");
         fbCancel = rootView.findViewById(R.id.btnCancel);
@@ -89,12 +87,6 @@ public class EditClassFragment extends DialogFragment implements CommonAction {
         TimePickerDialog dialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String suffix = "AM";
-                if (hourOfDay >= 12) {
-                    suffix = "PM";
-                    hourOfDay -= 12;
-                    ampm.setText(suffix);
-                }
                 if (txt.getId() == R.id.edit_time) {
                     time.setText(hourOfDay + ":" + minute);
                 } else if (txt.getId() == R.id.edit_time1) {

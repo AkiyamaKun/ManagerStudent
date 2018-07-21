@@ -30,7 +30,6 @@ public class AddClassActivity extends AppCompatActivity implements CommonAction 
         time = findViewById(R.id.edit_time);
         time1 = findViewById(R.id.edit_time1);
         days = findViewById(R.id.edit_days);
-        ampm = findViewById(R.id.ampm);
         final Calendar cal = Calendar.getInstance();
 //        time.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
@@ -85,12 +84,6 @@ public class AddClassActivity extends AppCompatActivity implements CommonAction 
         TimePickerDialog dialog = new TimePickerDialog(AddClassActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String suffix = "AM";
-                if (hourOfDay >= 12) {
-                    suffix = "PM";
-                    hourOfDay -= 12;
-                    ampm.setText(suffix);
-                }
                 if (txt.getId() == R.id.edit_time) {
                     time.setText(hourOfDay + ":" + minute);
                 } else if (txt.getId() == R.id.edit_time1) {
