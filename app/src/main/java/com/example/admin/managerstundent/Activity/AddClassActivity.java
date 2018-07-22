@@ -31,40 +31,6 @@ public class AddClassActivity extends AppCompatActivity implements CommonAction 
         time1 = findViewById(R.id.edit_time1);
         days = findViewById(R.id.edit_days);
         final Calendar cal = Calendar.getInstance();
-//        time.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                changeDate(v);
-//            }
-//        });
-//        time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                changeDate(v);
-//            }
-//        });
-//        time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                changeDate(v);
-//            }
-//        });
-//        time1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TimePickerDialog dialog = new TimePickerDialog(AddClassActivity.this, new TimePickerDialog.OnTimeSetListener() {
-//                    @Override
-//                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                        String suffix = "AM";
-//                        if(hourOfDay >= 12) {
-//                            suffix = "PM";
-//                            hourOfDay-=12;
-//                        }
-//                        time1.setText(hourOfDay+":"+minute+suffix);
-//                    }
-//                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false);
-//            }
-//        });
     }
 
     public void addClass(View view) {

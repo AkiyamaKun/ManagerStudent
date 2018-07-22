@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -89,10 +90,10 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
 
         if (className != null) {
             if(className.indexOf(" ") != -1) {
-                ((TextView) findViewById(R.id.txt)).setText("Class: " + className.substring(0, className.indexOf(" ")));
+                ((TextView) findViewById(R.id.txt)).setText(Html.fromHtml(("<b>Class:</b> "+ className)));
             }
-            ((TextView) findViewById(R.id.time)).setText("Time: " + getIntent().getStringExtra("time"));
-            txt.setText(txt.getText()+ className);
+            ((TextView) findViewById(R.id.time)).setText(Html.fromHtml(("<b>Time:</b> "+ getIntent().getStringExtra("time"))));
+            txt.setText(Html.fromHtml(("<b>" + txt.getText()+ ":</b> "+ className)));
         }
         fsearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override
@@ -181,7 +182,7 @@ public class ListStudentActivity extends AppCompatActivity implements Filter.Fil
 
 // set creator
         listView.setMenuCreator(creator);
-        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {

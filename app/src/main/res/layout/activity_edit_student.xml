@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/img"
                 android:layout_alignParentBottom="true"
+                android:background="@color/colorAccent"
                 android:src="@drawable/ic_edit"
                 android:layout_alignRight="@+id/img" />
         </RelativeLayout>
@@ -222,10 +223,33 @@
                 android:ems="10"
                 android:text="650 000"
                 android:inputType="number" />
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VND" />
+                android:text="VND"
+                android:inputType="text"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_weekday" />
+
+            <EditText
+                android:id="@+id/edit_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:focusable="false"
+                android:onClick="changeDate"
+                android:text="20/10/2017"
+                android:inputType="number" />
         </TableRow>
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -238,11 +262,11 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:text="Edit Student"
+        android:text="Update Student"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_fontIconResource="&#xf234;"
+        fancy:fb_fontIconResource="&#xf044;"
         fancy:fb_radius="30dp" />
 
     <mehdi.sakout.fancybuttons.FancyButton

@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private static final Integer[] colors = {3, 4, 5, 6};
 
     private Uri calUri;
+    final DateTimeFormatter dtf = DateTimeFormat.forPattern("dd MMMM, yyyy");
 
     /**
      * Override On Create
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.list);
         date = findViewById(R.id.date);
         List<ClassDTO> classes = new ArrayList<>();
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("hh:mm");
-        DateTime dt = dtf.parseDateTime("5:00");
+        DateTimeFormatter dtfg = DateTimeFormat.forPattern("hh:mm");
+        DateTime dt = dtfg.parseDateTime("5:00");
 
         long calID = getCelendarId();
         Uri updateUri = ContentUris.withAppendedId(CalendarContract.Calendars.CONTENT_URI, calID);
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         DateTimeFormatter format = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm");
         DateTime end2 = format.parseDateTime("20/07/2018 05:00");
 
+        date.setText(dtf.print(DateTime.now()));
         classes = db.findAllClass();
         if (classes.isEmpty()) {
             deleteEvents();
@@ -220,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeDate(View view) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("dd MMMM, yyyy");
         Calendar cal = Calendar.getInstance();
         DatePickerDialog dpd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override

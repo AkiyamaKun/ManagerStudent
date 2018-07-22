@@ -49,7 +49,7 @@ public class TableActivity extends AppCompatActivity implements WeekView.EventCl
     private List<String> mTitles = Arrays.asList("Japanese", "English", "Math", "Physics", "Chemistry", "Biology");
     private List<String> mHeaders = Arrays.asList("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
     private String subject[] = {"Math 9", "Math 10", "Chemistry 10", "Physics 11"};
-    private Integer colors[] ={R.color.color_table_1_light,R.color.color_table_2_light,R.color.color_table_3_light,R.color.color_table_4_light};
+    private Integer colors[] ={R.color.color_table_1,R.color.color_table_2,R.color.color_table_3,R.color.color_table_4};
     final SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 
     @Override
@@ -62,7 +62,7 @@ public class TableActivity extends AppCompatActivity implements WeekView.EventCl
         // Get a reference for the week view in the layout.
         mWeekView = (WeekView) findViewById(R.id.weekView);
         mWeekView.setShowNowLine(true);
-        mWeekView.setEventTextSize(20);
+        //mWeekView.setEventTextSize(20);
 
         mWeekView.notifyDatasetChanged();
 // Set an action when any event is clicked.
@@ -225,7 +225,7 @@ public class TableActivity extends AppCompatActivity implements WeekView.EventCl
         WeekViewEvent event = new WeekViewEvent(999,subject[0], startTime,endTime);
         events.add(event);
         Calendar calendar = Calendar.getInstance();
-        if (newMonth == calendar.get(Calendar.MONTH) || newMonth == calendar.get(Calendar.MONTH) + 1 )
+        if (newMonth == calendar.get(Calendar.MONTH))
             return events;
         else {
             return new ArrayList<WeekViewEvent>();

@@ -96,7 +96,7 @@ public class ListClassActivity extends AppCompatActivity {
 
 // set creator
         listView.setMenuCreator(creator);
-        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -119,7 +119,7 @@ public class ListClassActivity extends AppCompatActivity {
 //                        startActivity(intent);
 //                        break;
                     case 0:
-                        alertBuilder.setTitle("Delete Student")
+                        alertBuilder.setTitle("Delete This Class")
                                 .setIcon(R.drawable.ic_delete)
                                 .setMessage("Are You Sure ?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

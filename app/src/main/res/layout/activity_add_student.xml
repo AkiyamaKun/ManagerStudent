@@ -39,6 +39,7 @@
             android:layout_alignEnd="@+id/img"
             android:layout_alignParentBottom="true"
             android:src="@drawable/ic_edit"
+            android:background="@color/colorAccent"
             android:layout_alignRight="@+id/img" />
         </RelativeLayout>
 
@@ -212,10 +213,33 @@
                 android:ems="10"
                 android:hint="Fee"
                 android:inputType="number" />
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VND" />
+                android:text="VND"
+                android:inputType="text"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_weekday" />
+
+            <EditText
+                android:id="@+id/edit_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:focusable="false"
+                android:onClick="changeDate"
+                android:hint="Start date"
+                android:inputType="number" />
         </TableRow>
 
     <mehdi.sakout.fancybuttons.FancyButton

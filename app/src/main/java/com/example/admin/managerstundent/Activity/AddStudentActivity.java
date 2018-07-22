@@ -1,11 +1,14 @@
 package com.example.admin.managerstundent.Activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,7 +50,7 @@ import io.realm.Realm;
 /**
  * Author: DangNHH
  * 19/05/2018
- *
+ * <p>
  * Add Student Activity Class
  */
 public class AddStudentActivity extends AppCompatActivity implements ChooseClassInterface {
@@ -80,6 +83,7 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
 
     /**
      * Override On Create
+     *
      * @param savedInstanceState
      */
     @Override
@@ -97,7 +101,7 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
         DBAdapter adapter = new DBAdapter(this);
         adapter.open();
         List<ClassDTO> dtos = adapter.findAllClass();
-        for (ClassDTO dto: dtos) {
+        for (ClassDTO dto : dtos) {
             dataSrc.add(dto.getClassName());
         }
         adapter.close();
@@ -108,6 +112,7 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
 
     /**
      * Excute event click on button Reset in activity add student
+     *
      * @param view
      */
     public void ClickOnReset(View view) {
@@ -121,6 +126,7 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
 
     /**
      * Excute event click on button Submit in activity add student
+     *
      * @param view
      */
     public void ClickOnSubmit(View view) {
@@ -133,9 +139,9 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
         //Get max index with primary key
         Number currentId = realm.where(Student.class).max("studentID");
         int nextId = 0;
-        if(currentId == null){
+        if (currentId == null) {
             nextId = 1;
-        }else{
+        } else {
             nextId = currentId.intValue() + 1;
         }
 
@@ -153,7 +159,7 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
         } catch (ParseException e) {
             student.setBirthday(null);
         }
-        Log.d(TAG, String.format("ClickOnSubmit: %s",student.toString() ));
+        Log.d(TAG, String.format("ClickOnSubmit: %s", student.toString()));
 
         //Commit transaction
         realm.commitTransaction();
@@ -165,49 +171,103 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
         startActivity(intent);
         finish();
     }
+
+    private static final int TAKE_PICTURE = 1;
+    private Uri imageUri;
     public void onChooseImage(View view) {
         userAvatar = null;
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(photo));
+        imageUri = Uri.fromFile(photo);
+        startActivityForResult(intent, TAKE_PICTURE);
+
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
 
     }
 
+    //    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            returnUri = data.getData();
+//            getFilePath();
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), returnUri);
+//                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+//
+//                rotateBitmap = null;
+//                switch (orientation) {
+//
+//                    case ExifInterface.ORIENTATION_ROTATE_90:
+//                        rotateBitmap = rotateImage(bitmap, 90);
+//                        break;
+//
+//                    case ExifInterface.ORIENTATION_ROTATE_180:
+//                        rotateBitmap = rotateImage(bitmap, 180);
+//                        break;
+//
+//                    case ExifInterface.ORIENTATION_ROTATE_270:
+//                        rotateBitmap = rotateImage(bitmap, 270);
+//                        break;
+//
+//                    case ExifInterface.ORIENTATION_NORMAL:
+//                    default:
+//                        rotateBitmap = bitmap;
+//                }
+//                pickImage = findViewById(R.id.img);
+//                pickImage.setImageBitmap(rotateBitmap);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            returnUri = data.getData();
-            getFilePath();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), returnUri);
-                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+        getFilePath();
+        switch (requestCode) {
+            case TAKE_PICTURE:
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri selectedImage = imageUri;
+                    getContentResolver().notifyChange(selectedImage, null);
+                    ContentResolver cr = getContentResolver();
+                    Bitmap bitmap;
+                    int orientation = 6;
+                    try {
+                        bitmap = android.provider.MediaStore.Images.Media
+                                .getBitmap(cr, selectedImage);
+                        pickImage = findViewById(R.id.img);
+                        orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+                        rotateBitmap = null;
+                        switch (orientation) {
 
-                rotateBitmap = null;
-                switch (orientation) {
+                            case ExifInterface.ORIENTATION_ROTATE_90:
+                                rotateBitmap = rotateImage(bitmap, 90);
 
-                    case ExifInterface.ORIENTATION_ROTATE_90:
-                        rotateBitmap = rotateImage(bitmap, 90);
-                        break;
+                                break;
 
-                    case ExifInterface.ORIENTATION_ROTATE_180:
-                        rotateBitmap = rotateImage(bitmap, 180);
-                        break;
+                            case ExifInterface.ORIENTATION_ROTATE_180:
+                                rotateBitmap = rotateImage(bitmap, 180);
+                                break;
 
-                    case ExifInterface.ORIENTATION_ROTATE_270:
-                        rotateBitmap = rotateImage(bitmap, 270);
-                        break;
+                            case ExifInterface.ORIENTATION_ROTATE_270:
+                                rotateBitmap = rotateImage(bitmap, 270);
+                                break;
 
-                    case ExifInterface.ORIENTATION_NORMAL:
-                    default:
-                        rotateBitmap = bitmap;
+                            case ExifInterface.ORIENTATION_NORMAL:
+                            default:
+                                rotateBitmap = bitmap;
+                        }
+                        pickImage.setImageBitmap(rotateBitmap);
+                    } catch (Exception e) {
+                        Log.e("Camera", e.toString());
+                    }
                 }
-                pickImage = findViewById(R.id.img);
-                pickImage.setImageBitmap(rotateBitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -219,7 +279,7 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
     }
 
     private void getFilePath() {
-        String filePath = DocumentHelper.getPath(this, this.returnUri);
+        String filePath = DocumentHelper.getPath(this, this.imageUri);
         if (filePath == null || filePath.isEmpty()) return;
         chosenFile = new File(filePath);
         try {
@@ -244,13 +304,13 @@ public class AddStudentActivity extends AppCompatActivity implements ChooseClass
 
     @Override
     public void changeClass(String classes) {
-        if(classes.length()>3) {
-            grade.setText(classes.substring(1,classes.length()));
+        if (classes.length() > 3) {
+            grade.setText(classes.substring(1, classes.length()));
         }
     }
 
     public void chooseClass(View view) {
         ClassChooserFragment fragment = new ClassChooserFragment();
-        fragment.show(getSupportFragmentManager(),"choose classes");
+        fragment.show(getSupportFragmentManager(), "choose classes");
     }
 }
